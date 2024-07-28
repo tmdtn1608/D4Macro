@@ -5,6 +5,7 @@ using D4Macro.Model;
 using D4Macro.ViewModel;
 using WindowsInput;
 using WindowsInput.Native;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace D4Macro;
 
@@ -20,10 +21,6 @@ public partial class MainView : UserControl
         Loaded += (sender, args) =>
         {
             _mainViewModel = DataContext as MainViewModel;
-            if (File.Exists(SettingsFilePath))
-            {
-                _mainViewModel.InputModel = InputModel.LoadSettings(SettingsFilePath);
-            }
         };
     }
 
@@ -55,20 +52,15 @@ public partial class MainView : UserControl
 
     private void LoadButton_Click(object sender, RoutedEventArgs e)
     {
-        var settings = InputModel.LoadSettings(SettingsFilePath);
-
-        Key1IntervalTextBox.Text = settings.Key1Interval.ToString();
-        Key1CheckBox.IsChecked = settings.Key1CheckBox;
-        Key2IntervalTextBox.Text = settings.Key2Interval.ToString();
-        Key2CheckBox.IsChecked = settings.Key2CheckBox;
-        Key3IntervalTextBox.Text = settings.Key3Interval.ToString();
-        Key3CheckBox.IsChecked = settings.Key3CheckBox;
-        Key4IntervalTextBox.Text = settings.Key4Interval.ToString();
-        Key4CheckBox.IsChecked = settings.Key4CheckBox;
-        MouseLeftIntervalTextBox.Text = settings.MouseLeftInterval.ToString();
-        MouseLeftCheckBox.IsChecked = settings.MouseLeftCheckBox;
-        MouseRightIntervalTextBox.Text = settings.MouseRightInterval.ToString();
-        MouseRightCheckBox.IsChecked = settings.MouseRightCheckBox;
+        if (File.Exists(SettingsFilePath))
+        {
+            _mainViewModel.InputModel = InputModel.LoadSettings(SettingsFilePath);
+        }
+        else
+        {
+            MessageBox.Show("저장된 데이터가 없습니다");
+        }
+        
     }
     
 }

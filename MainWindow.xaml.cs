@@ -88,9 +88,6 @@ public partial class MainWindow : Window
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
-        // HotkeyManager.Current.Remove("ToggleMacro");
-        // _processMonitor?.Dispose();
-        // _notifyIcon?.Dispose();
         if (!_isApplicationClosing)
         {
             e.Cancel = true;
@@ -142,7 +139,6 @@ public partial class MainWindow : Window
         e.Handled = true;
     }
 
-
     private void Import_Setting(object sender, RoutedEventArgs e)
     {
         OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -158,7 +154,7 @@ public partial class MainWindow : Window
             }
             catch (Exception ex)
             {
-                MessageBox.Show("파일을 읽는 동안 오류가 발생했습니다: " + ex.Message);
+                MessageBox.Show("매크로 데이터 불러오기 실패: " + ex.Message);
             }
         }
     }
@@ -174,11 +170,11 @@ public partial class MainWindow : Window
             try
             {
                 InputModel.SaveSettings(_mainViewModel.InputModel,filePath);
-                MessageBox.Show("파일이 성공적으로 저장되었습니다.");
+                MessageBox.Show("매크로 데이터 저장 성공");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("파일을 저장하는 동안 오류가 발생했습니다: " + ex.Message);
+                MessageBox.Show("매크로 데이저 저장 실패: " + ex.Message);
             }
         }
     }
