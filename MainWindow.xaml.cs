@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -7,7 +6,6 @@ using D4Macro.Model;
 using D4Macro.ViewModel;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using NHotkey;
 using NHotkey.Wpf;
 

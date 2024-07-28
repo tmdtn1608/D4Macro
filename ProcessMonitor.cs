@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Timers;
-using System.Windows.Forms;
-using Hardcodet.Wpf.TaskbarNotification;
 using Timer = System.Timers.Timer;
 
 namespace D4Macro;

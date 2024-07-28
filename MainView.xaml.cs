@@ -3,8 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using D4Macro.Model;
 using D4Macro.ViewModel;
-using WindowsInput;
-using WindowsInput.Native;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace D4Macro;
