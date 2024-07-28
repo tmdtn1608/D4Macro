@@ -1,9 +1,13 @@
 ﻿using System.Drawing;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using D4Macro.Model;
 using D4Macro.ViewModel;
 using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 using NHotkey;
 using NHotkey.Wpf;
 
@@ -116,6 +120,10 @@ public partial class MainWindow : Window
         // 애플리케이션 종료
         Application.Current.Shutdown();
     }
+    private void ApplicationTerminate(object sender, RoutedEventArgs e)
+    {
+        ApplicationTerminate();
+    }
 
     private void CheckTargetProcess()
     {
@@ -132,5 +140,52 @@ public partial class MainWindow : Window
         var viewModel = (MainViewModel)DataContext;
         viewModel.ToggleMacro();
         e.Handled = true;
+    }
+
+
+    private void Import_Setting(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "MacroData (*.json)|*.json";
+        openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        if (openFileDialog.ShowDialog() == true)
+        {
+            string filePath = openFileDialog.FileName;
+            try
+            {
+                InputModel jsonObject = InputModel.LoadSettings(filePath);
+                _mainViewModel.InputModel = jsonObject;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("파일을 읽는 동안 오류가 발생했습니다: " + ex.Message);
+            }
+        }
+    }
+
+    private void Export_Setting(object sender, RoutedEventArgs e)
+    {
+        SaveFileDialog saveFileDialog = new SaveFileDialog();
+        saveFileDialog.Filter = "MacroData (*.json)|*.json";
+        saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        if (saveFileDialog.ShowDialog() == true)
+        {
+            string filePath = saveFileDialog.FileName;
+            try
+            {
+                InputModel.SaveSettings(_mainViewModel.InputModel,filePath);
+                MessageBox.Show("파일이 성공적으로 저장되었습니다.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("파일을 저장하는 동안 오류가 발생했습니다: " + ex.Message);
+            }
+        }
+    }
+
+    private void SetConfig(object sender, RoutedEventArgs e)
+    {
+        SettingWindow settingsWindow = new SettingWindow();
+        settingsWindow.ShowDialog();
     }
 }

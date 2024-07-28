@@ -39,7 +39,11 @@ public class MainViewModel : BaseViewModel
     public InputModel InputModel
     {
         get { return _inputModel;}
-        private set { _inputModel = value; }
+        set
+        {
+            _inputModel = value;
+            OnPropertyChanged(nameof(InputModel));
+        }
     }
 
     public ICommand ToggleMacroCommand { get; }
@@ -107,39 +111,39 @@ public class MainViewModel : BaseViewModel
         IsMacroRunning = !IsMacroRunning;
         if (IsMacroRunning)
         {
-            if (InputModel.Key1CheckBox == true && InputModel.key1Interval != 0)
+            if (InputModel.Key1CheckBox == true && InputModel.Key1Interval != 0)
             {
-                _key1Timer.Interval = TimeSpan.FromMilliseconds(InputModel.key1Interval);
+                _key1Timer.Interval = TimeSpan.FromMilliseconds(InputModel.Key1Interval);
                 _key1Timer.Start();
             }
 
-            if (InputModel.Key2CheckBox == true && InputModel.key2Interval != 0)
+            if (InputModel.Key2CheckBox == true && InputModel.Key2Interval != 0)
             {
-                _key2Timer.Interval = TimeSpan.FromMilliseconds(InputModel.key2Interval);
+                _key2Timer.Interval = TimeSpan.FromMilliseconds(InputModel.Key2Interval);
                 _key2Timer.Start();
             }
 
-            if (InputModel.Key3CheckBox == true && InputModel.key3Interval != 0)
+            if (InputModel.Key3CheckBox == true && InputModel.Key3Interval != 0)
             {
-                _key3Timer.Interval = TimeSpan.FromMilliseconds(InputModel.key3Interval);
+                _key3Timer.Interval = TimeSpan.FromMilliseconds(InputModel.Key3Interval);
                 _key3Timer.Start();
             }
 
-            if (InputModel.Key4CheckBox == true && InputModel.key4Interval != 0)
+            if (InputModel.Key4CheckBox == true && InputModel.Key4Interval != 0)
             {
-                _key4Timer.Interval = TimeSpan.FromMilliseconds(InputModel.key4Interval);
+                _key4Timer.Interval = TimeSpan.FromMilliseconds(InputModel.Key4Interval);
                 _key4Timer.Start();
             }
 
-            if (InputModel.mouseLeftCheckBox == true && InputModel.mouseLeftInterval != 0)
+            if (InputModel.MouseLeftCheckBox == true && InputModel.MouseLeftInterval != 0)
             {
-                _mouseLeftTimer.Interval = TimeSpan.FromMilliseconds(InputModel.mouseLeftInterval);
+                _mouseLeftTimer.Interval = TimeSpan.FromMilliseconds(InputModel.MouseLeftInterval);
                 _mouseLeftTimer.Start();
             }
 
-            if (InputModel.mouseRightCheckBox == true && InputModel.mouseRightInterval != 0)
+            if (InputModel.MouseRightCheckBox == true && InputModel.MouseRightInterval != 0)
             {
-                _mouseRightTimer.Interval = TimeSpan.FromMilliseconds(InputModel.mouseRightInterval);
+                _mouseRightTimer.Interval = TimeSpan.FromMilliseconds(InputModel.MouseRightInterval);
                 _mouseRightTimer.Start();
             }
         }

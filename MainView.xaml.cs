@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
+using D4Macro.Model;
 using D4Macro.ViewModel;
 using WindowsInput;
 using WindowsInput.Native;
@@ -10,7 +12,7 @@ public partial class MainView : UserControl
 {
     private MainViewModel _mainViewModel;
     
-    private const string SettingsFilePath = "macroSettings.json";
+    private static readonly string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "quickSave.json");
     
     public MainView()
     {
@@ -18,6 +20,10 @@ public partial class MainView : UserControl
         Loaded += (sender, args) =>
         {
             _mainViewModel = DataContext as MainViewModel;
+            if (File.Exists(SettingsFilePath))
+            {
+                _mainViewModel.InputModel = InputModel.LoadSettings(SettingsFilePath);
+            }
         };
     }
 
@@ -28,41 +34,41 @@ public partial class MainView : UserControl
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        var settings = new MacroJson
+        var settings = new InputModel
         {
             Key1Interval = int.TryParse(Key1IntervalTextBox.Text, out int key1Interval) ? key1Interval : 0,
-            Key1Enabled = Key1CheckBox.IsChecked == true,
+            Key1CheckBox = Key1CheckBox.IsChecked == true,
             Key2Interval = int.TryParse(Key2IntervalTextBox.Text, out int key2Interval) ? key2Interval : 0,
-            Key2Enabled = Key2CheckBox.IsChecked == true,
+            Key2CheckBox = Key2CheckBox.IsChecked == true,
             Key3Interval = int.TryParse(Key3IntervalTextBox.Text, out int key3Interval) ? key3Interval : 0,
-            Key3Enabled = Key3CheckBox.IsChecked == true,
+            Key3CheckBox = Key3CheckBox.IsChecked == true,
             Key4Interval = int.TryParse(Key4IntervalTextBox.Text, out int key4Interval) ? key4Interval : 0,
-            Key4Enabled = Key4CheckBox.IsChecked == true,
+            Key4CheckBox = Key4CheckBox.IsChecked == true,
             MouseLeftInterval = int.TryParse(MouseLeftIntervalTextBox.Text, out int mouseLeftInterval) ? mouseLeftInterval : 0,
-            MouseLeftEnabled = MouseLeftCheckBox.IsChecked == true,
+            MouseLeftCheckBox = MouseLeftCheckBox.IsChecked == true,
             MouseRightInterval = int.TryParse(MouseRightIntervalTextBox.Text, out int mouseRightInterval) ? mouseRightInterval : 0,
-            MouseRightEnabled = MouseRightCheckBox.IsChecked == true,
+            MouseRightCheckBox = MouseRightCheckBox.IsChecked == true,
         };
 
-        MacroJson.SaveSettings(settings, SettingsFilePath);
+        InputModel.SaveSettings(settings, SettingsFilePath);
     }
 
     private void LoadButton_Click(object sender, RoutedEventArgs e)
     {
-        var settings = MacroJson.LoadSettings(SettingsFilePath);
+        var settings = InputModel.LoadSettings(SettingsFilePath);
 
         Key1IntervalTextBox.Text = settings.Key1Interval.ToString();
-        Key1CheckBox.IsChecked = settings.Key1Enabled;
+        Key1CheckBox.IsChecked = settings.Key1CheckBox;
         Key2IntervalTextBox.Text = settings.Key2Interval.ToString();
-        Key2CheckBox.IsChecked = settings.Key2Enabled;
+        Key2CheckBox.IsChecked = settings.Key2CheckBox;
         Key3IntervalTextBox.Text = settings.Key3Interval.ToString();
-        Key3CheckBox.IsChecked = settings.Key3Enabled;
+        Key3CheckBox.IsChecked = settings.Key3CheckBox;
         Key4IntervalTextBox.Text = settings.Key4Interval.ToString();
-        Key4CheckBox.IsChecked = settings.Key4Enabled;
+        Key4CheckBox.IsChecked = settings.Key4CheckBox;
         MouseLeftIntervalTextBox.Text = settings.MouseLeftInterval.ToString();
-        MouseLeftCheckBox.IsChecked = settings.MouseLeftEnabled;
+        MouseLeftCheckBox.IsChecked = settings.MouseLeftCheckBox;
         MouseRightIntervalTextBox.Text = settings.MouseRightInterval.ToString();
-        MouseRightCheckBox.IsChecked = settings.MouseRightEnabled;
+        MouseRightCheckBox.IsChecked = settings.MouseRightCheckBox;
     }
     
 }

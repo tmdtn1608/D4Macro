@@ -16,49 +16,49 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="숫자키 1:" VerticalAlignment="Center" Width="100"/>
-                <TextBox Name="Key1IntervalTextBox" Width="80" Text="{Binding InputModel.key1Interval, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Name="Key1IntervalTextBox" Width="80" Text="{Binding InputModel.Key1Interval, UpdateSourceTrigger=PropertyChanged}" />
                 <CheckBox Name="Key1CheckBox" VerticalAlignment="Center" Margin="5 0 0 0" IsChecked="{Binding InputModel.Key1CheckBox, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="적용" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="숫자키 2:" VerticalAlignment="Center" Width="100"/>
-                <TextBox Name="Key2IntervalTextBox" Width="80" Text="{Binding InputModel.key2Interval, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Name="Key2IntervalTextBox" Width="80" Text="{Binding InputModel.Key2Interval, UpdateSourceTrigger=PropertyChanged}"/>
                 <CheckBox Name="Key2CheckBox" VerticalAlignment="Center" Margin="5 0 0 0" IsChecked="{Binding InputModel.Key2CheckBox, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="적용" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="숫자키 3:" VerticalAlignment="Center" Width="100"/>
-                <TextBox Name="Key3IntervalTextBox" Width="80" Text="{Binding InputModel.key3Interval, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Name="Key3IntervalTextBox" Width="80" Text="{Binding InputModel.Key3Interval, UpdateSourceTrigger=PropertyChanged}"/>
                 <CheckBox Name="Key3CheckBox" VerticalAlignment="Center" Margin="5 0 0 0" IsChecked="{Binding InputModel.Key3CheckBox, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="적용" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="숫자키 4:" VerticalAlignment="Center" Width="100"/>
-                <TextBox Name="Key4IntervalTextBox" Width="80" Text="{Binding InputModel.key4Interval, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Name="Key4IntervalTextBox" Width="80" Text="{Binding InputModel.Key4Interval, UpdateSourceTrigger=PropertyChanged}"/>
                 <CheckBox Name="Key4CheckBox" VerticalAlignment="Center" Margin="5 0 0 0" IsChecked="{Binding InputModel.Key4CheckBox, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="적용" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="마우스 좌클릭:" VerticalAlignment="Center" Width="100"/>
-                <TextBox Name="MouseLeftIntervalTextBox" Width="80" Text="{Binding InputModel.mouseLeftInterval, UpdateSourceTrigger=PropertyChanged}"/>
-                <CheckBox Name="MouseLeftCheckBox" VerticalAlignment="Center" Margin="5 0 0 0" IsChecked="{Binding InputModel.mouseLeftCheckBox, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Name="MouseLeftIntervalTextBox" Width="80" Text="{Binding InputModel.MouseLeftInterval, UpdateSourceTrigger=PropertyChanged}"/>
+                <CheckBox Name="MouseLeftCheckBox" VerticalAlignment="Center" Margin="5 0 0 0" IsChecked="{Binding InputModel.MouseLeftCheckBox, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="적용" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="마우스 우클릭:" VerticalAlignment="Center" Width="100"/>
-                <TextBox Name="MouseRightIntervalTextBox" Width="80" Text="{Binding InputModel.mouseRightInterval, UpdateSourceTrigger=PropertyChanged}"/>
-                <CheckBox Name="MouseRightCheckBox" VerticalAlignment="Center" Margin="5 0 0 0" IsChecked="{Binding InputModel.mouseRightCheckBox, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Name="MouseRightIntervalTextBox" Width="80" Text="{Binding InputModel.MouseRightInterval, UpdateSourceTrigger=PropertyChanged}"/>
+                <CheckBox Name="MouseRightCheckBox" VerticalAlignment="Center" Margin="5 0 0 0" IsChecked="{Binding InputModel.MouseRightCheckBox, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="적용" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Name="SaveButton" Content="저장" Width="80" Margin="5" Click="SaveButton_Click"/>
-                <Button Name="LoadButton" Content="불러오기" Width="80" Margin="5" Click="LoadButton_Click"/>
+                <Button Name="SaveButton" Content="빠른저장" Width="80" Margin="5" Click="SaveButton_Click"/>
+                <Button Name="LoadButton" Content="빠른불러오기" Width="80" Margin="5" Click="LoadButton_Click"/>
                 <Button Name="ToggleMacroButton" Content="{Binding ButtonText}" Width="80" Margin="5" Click="ToggleMacroButton_Click"/>
             </StackPanel>
         </StackPanel>

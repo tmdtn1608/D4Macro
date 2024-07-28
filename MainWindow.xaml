@@ -6,11 +6,26 @@
         xmlns:local="clr-namespace:D4Macro"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="D4Macro" Height="290" Width="320"
+        Title="D4Macro" Height="300" Width="330"
         Icon="Resources/devil.ico"
         StateChanged="Window_StateChanged"
         Closing="Window_Closing">
     <Grid>
-        <local:MainView DataContext="{Binding }"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Menu bar -->
+            <RowDefinition Height="*"/> <!-- Main content -->
+        </Grid.RowDefinitions>
+        <Menu Background="White">
+            <MenuItem Header="_Edit">
+                <!-- <MenuItem Command="ApplicationCommands.Copy"/> -->
+                <!-- <MenuItem Command="ApplicationCommands.Cut"/> -->
+                <!-- <MenuItem Command="ApplicationCommands.Paste"/> -->
+                <MenuItem Header="Import" Click="Import_Setting"/>
+                <MenuItem Header="Export" Click="Export_Setting"/>
+                <MenuItem Header="Config" Click="SetConfig"/>
+                <MenuItem Header="Exit" Click="ApplicationTerminate"/>
+            </MenuItem>
+        </Menu>
+        <local:MainView Grid.Row="1" DataContext="{Binding }"/>
     </Grid>
 </Window>

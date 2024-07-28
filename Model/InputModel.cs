@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace D4Macro.Model;
 
@@ -12,6 +14,7 @@ public class InputModel : INotifyPropertyChanged
     }
     
     private bool _key1CheckBox;
+    [JsonProperty(nameof(Key1CheckBox))]
     public bool Key1CheckBox {
         get { return _key1CheckBox; }
         set
@@ -22,18 +25,19 @@ public class InputModel : INotifyPropertyChanged
     }
 
     private int _key1Interval = 0;
-
-    public int key1Interval
+    [JsonProperty(nameof(Key1Interval))]
+    public int Key1Interval
     {
         get { return _key1Interval;}
         set
         {
             _key1Interval = value;
-            OnPropertyChanged(nameof(key1Interval));
+            OnPropertyChanged(nameof(Key1Interval));
         }
     }
     
     private bool _key2CheckBox;
+    [JsonProperty(nameof(Key2CheckBox))]
     public bool Key2CheckBox {
         get { return _key2CheckBox; }
         set
@@ -44,18 +48,19 @@ public class InputModel : INotifyPropertyChanged
     }
 
     private int _key2Interval = 0;
-
-    public int key2Interval
+    [JsonProperty(nameof(Key2Interval))]
+    public int Key2Interval
     {
         get { return _key2Interval;}
         set
         {
             _key2Interval = value;
-            OnPropertyChanged(nameof(key2Interval));
+            OnPropertyChanged(nameof(Key2Interval));
         }
     }
     
     private bool _key3CheckBox;
+    [JsonProperty(nameof(Key3CheckBox))]
     public bool Key3CheckBox {
         get { return _key3CheckBox; }
         set
@@ -66,18 +71,19 @@ public class InputModel : INotifyPropertyChanged
     }
 
     private int _key3Interval = 0;
-
-    public int key3Interval
+    [JsonProperty(nameof(Key3Interval))]
+    public int Key3Interval
     {
         get { return _key3Interval;}
         set
         {
             _key3Interval = value;
-            OnPropertyChanged(nameof(key3Interval));
+            OnPropertyChanged(nameof(Key3Interval));
         }
     }
     
     private bool _key4CheckBox;
+    [JsonProperty(nameof(Key4CheckBox))]
     public bool Key4CheckBox {
         get { return _key4CheckBox; }
         set
@@ -88,61 +94,78 @@ public class InputModel : INotifyPropertyChanged
     }
 
     private int _key4Interval = 0;
-
-    public int key4Interval
+    [JsonProperty(nameof(Key4Interval))]
+    public int Key4Interval
     {
         get { return _key4Interval;}
         set
         {
             _key4Interval = value;
-            OnPropertyChanged(nameof(key4Interval));
+            OnPropertyChanged(nameof(Key4Interval));
         }
     }
 
     private bool _mouseLeftCheckBox;
-    public bool mouseLeftCheckBox
+    [JsonProperty(nameof(MouseLeftCheckBox))]
+    public bool MouseLeftCheckBox
     {
         get { return _mouseLeftCheckBox; }
         set
         {
             _mouseLeftCheckBox = value;
-            OnPropertyChanged(nameof(mouseLeftCheckBox));
+            OnPropertyChanged(nameof(MouseLeftCheckBox));
         }
     }
 
     private int _mouseLeftInterval = 0;
-
-    public int mouseLeftInterval
+    [JsonProperty(nameof(MouseLeftInterval))]
+    public int MouseLeftInterval
     {
         get { return _mouseLeftInterval; }
         set
         {
             _mouseLeftInterval = value;
-            OnPropertyChanged(nameof(mouseLeftInterval));
+            OnPropertyChanged(nameof(MouseLeftInterval));
         }
     }
     
     private bool _mouseRightCheckBox;
-    public bool mouseRightCheckBox
+    [JsonProperty(nameof(MouseRightCheckBox))]
+    public bool MouseRightCheckBox
     {
         get { return _mouseRightCheckBox; }
         set
         {
             _mouseRightCheckBox = value;
-            OnPropertyChanged(nameof(mouseRightCheckBox));
+            OnPropertyChanged(nameof(MouseRightCheckBox));
         }
     }
 
     private int _mouseRightInterval = 0;
-
-    public int mouseRightInterval
+    [JsonProperty(nameof(MouseRightInterval))]
+    public int MouseRightInterval
     {
         get { return _mouseRightInterval; }
         set
         {
             _mouseRightInterval = value;
-            OnPropertyChanged(nameof(mouseRightInterval));
+            OnPropertyChanged(nameof(MouseRightInterval));
         }
+    }
+    
+    public static void SaveSettings(InputModel settings, string filePath)
+    {
+        var json = JsonConvert.SerializeObject(settings, Formatting.Indented);
+        File.WriteAllText(filePath, json);
+    }
+
+    public static InputModel LoadSettings(string filePath)
+    {
+        if (!File.Exists(filePath))
+            return new InputModel();
+
+        var json = File.ReadAllText(filePath);
+        return JsonConvert.DeserializeObject<InputModel>(json);
     }
 
 }
