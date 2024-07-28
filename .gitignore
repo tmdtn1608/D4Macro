@@ -1,0 +1,61 @@
+# Build Results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio 2019
+.vs/
+.vscode/
+.vsconfig
+
+# Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+Generated\ Files/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Minidump files
+*.mdmp
+
+# Files that might appear in the root of a volume
+!.gitignore
+!.gitattributes
+
+# Windows 10 lock screen images
+*._lock
+
+# Store info file
+.DS_Store
+
+# Folders to ignore
+TestResults/
+UITestOutput/
+PerfOutput/
+PublishedOutput/
