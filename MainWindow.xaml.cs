@@ -98,7 +98,8 @@ public partial class MainWindow : Window
         }
     }
 
-    private void ApplicationTerminate()
+    // TODO : ApplicationTerminate -> Command로 위임
+    public void ApplicationTerminate()
     {
         HotkeyManager.Current.Remove("ToggleMacro");
         _processMonitor?.Dispose();
