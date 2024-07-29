@@ -4,9 +4,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:D4Macro"
+        xmlns:vm="clr-namespace:D4Macro.ViewModel"
+        xmlns:m="clr-namespace:D4Macro.Model"
         mc:Ignorable="d"
         Title="Config" Height="330" Width="330">
+    <Window.DataContext>
+        <m:ConfigModel/>
+    </Window.DataContext>
     <Grid>
-        <TextBlock>aaaa</TextBlock>
+        <TextBlock Text="{Binding LaunchKey}"/>
+        <TextBlock Text="{Binding ActiveTray}"/>
     </Grid>
 </Window>

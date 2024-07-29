@@ -1,9 +1,11 @@
 ﻿using System.Windows;
+using D4Macro.Model;
 
 namespace D4Macro;
 
 public partial class SettingWindow : Window
 {
+    private ConfigModel _configModel = App.ConfigModel;
     public SettingWindow()
     {
         InitializeComponent();
@@ -18,5 +20,6 @@ public partial class SettingWindow : Window
     private void GetConfig(object sender, RoutedEventArgs e)
     {
         
+        DataContext = _configModel;
     }
 }
