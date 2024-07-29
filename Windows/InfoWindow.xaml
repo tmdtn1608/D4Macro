@@ -1,0 +1,40 @@
+﻿<Window x:Class="D4Macro.Windows.InfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:D4Macro.Windows"
+        mc:Ignorable="d"
+        Title="정보" Height="240" Width="300">
+    <Grid>
+        <StackPanel Margin="10">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Width="80">Developer</TextBlock>
+                <TextBlock>Xcient</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Width="80">Version</TextBlock>
+                <TextBlock>1.0</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Width="80">Released</TextBlock>
+                <TextBlock>2024/08/01</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Width="80">Contact</TextBlock>
+                <TextBlock>Xcient1608@gmail.com</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Width="80">Copyright</TextBlock>
+                <TextBlock>© 2024 Xcient. All rights reserved.</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Width="80">License</TextBlock>
+                <TextBlock TextWrapping="Wrap" MaxWidth="200">
+                    <Run>CC BY-NC-SA 4.0</Run>
+                    <Run>International License.</Run>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

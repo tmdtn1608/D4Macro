@@ -7,7 +7,7 @@
         xmlns:view="clr-namespace:D4Macro.View"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
-        Title="D4Macro" Height="300" Width="330"
+        Title="D4Macro" Height="320" Width="330"
         Icon="Resources/devil.ico"
         StateChanged="Window_StateChanged"
         Closing="Window_Closing">
@@ -17,17 +17,17 @@
             <RowDefinition Height="*"/> <!-- Main content -->
         </Grid.RowDefinitions>
         <Menu Background="White">
-            <MenuItem Header="_Menu">
+            <MenuItem Header="메뉴">
                 <!-- <MenuItem Command="ApplicationCommands.Copy"/> -->
                 <!-- <MenuItem Command="ApplicationCommands.Cut"/> -->
                 <!-- <MenuItem Command="ApplicationCommands.Paste"/> -->
-                <MenuItem Header="Import" Click="Import_Setting"/>
-                <MenuItem Header="Export" Click="Export_Setting"/>
-                <MenuItem Header="Config" Click="SetConfig"/>
-                <MenuItem Header="Info" Click="ViewInfo"/>
-                <MenuItem Header="Exit" Click="ApplicationTerminate"/>
+                <MenuItem Header="불러오기" Click="Import_Setting"/>
+                <MenuItem Header="내보내기" Click="Export_Setting"/>
+                <MenuItem Header="설정" Click="SetConfig"/>
+                <MenuItem Header="정보" Click="ViewInfo"/>
+                <MenuItem Header="끝내기" Click="ApplicationTerminate"/>
             </MenuItem>
         </Menu>
-        <view:MainView Grid.Row="1" DataContext="{Binding }"/>
+        <view:MainView Grid.Row="1" Margin="5" DataContext="{Binding }"/>
     </Grid>
 </Window>

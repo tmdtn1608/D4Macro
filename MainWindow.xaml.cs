@@ -6,6 +6,7 @@ using D4Macro;
 using D4Macro.Model;
 using D4Macro.Util;
 using D4Macro.ViewModel;
+using D4Macro.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
 
@@ -164,6 +165,7 @@ public partial class MainWindow : Window
 
     private void ViewInfo(object sender, RoutedEventArgs e)
     {
-        // TODO : 제작자 정보 보여주기
+        InfoWindow infoWindow = new InfoWindow();
+        infoWindow.ShowDialog();
     }
 }

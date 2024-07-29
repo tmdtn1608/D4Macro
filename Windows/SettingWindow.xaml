@@ -9,7 +9,7 @@
         xmlns:u="clr-namespace:D4Macro.Util"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Config" Height="300" Width="300">
+        Title="설정" Height="300" Width="300">
     <Window.DataContext>
         <m:ConfigModel/>
     </Window.DataContext>
