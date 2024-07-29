@@ -1,0 +1,35 @@
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Newtonsoft.Json;
+
+namespace D4Macro.Model;
+
+public class ConfigModel : BaseModel
+{
+    private Key _launchKey = Key.F12;
+    
+    [JsonProperty(nameof(LaunchKey))]
+    public Key LaunchKey
+    {
+        get { return _launchKey;}
+        set
+        {
+            _launchKey = value;
+            OnPropertyChanged(nameof(LaunchKey));
+        }
+    }
+
+    private bool _activeTray = true;
+
+    [JsonProperty(nameof(ActiveTray))]
+    public bool ActiveTray
+    {
+        get { return _activeTray; }
+        set
+        {
+            _activeTray = value;
+            OnPropertyChanged(nameof(ActiveTray));
+        }
+    }
+}

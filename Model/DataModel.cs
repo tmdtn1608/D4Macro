@@ -4,15 +4,8 @@ using Newtonsoft.Json;
 
 namespace D4Macro.Model;
 
-public class InputModel : INotifyPropertyChanged
+public class DataModel : BaseModel
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-    
-    protected void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-    
     private bool _key1CheckBox;
     [JsonProperty(nameof(Key1CheckBox))]
     public bool Key1CheckBox {
@@ -153,19 +146,19 @@ public class InputModel : INotifyPropertyChanged
         }
     }
     
-    public static void SaveSettings(InputModel settings, string filePath)
+    public static void SaveSettings(DataModel settings, string filePath)
     {
         var json = JsonConvert.SerializeObject(settings, Formatting.Indented);
         File.WriteAllText(filePath, json);
     }
 
-    public static InputModel LoadSettings(string filePath)
+    public static DataModel LoadSettings(string filePath)
     {
         if (!File.Exists(filePath))
-            return new InputModel();
+            return new DataModel();
 
         var json = File.ReadAllText(filePath);
-        return JsonConvert.DeserializeObject<InputModel>(json);
+        return JsonConvert.DeserializeObject<DataModel>(json);
     }
 
 }

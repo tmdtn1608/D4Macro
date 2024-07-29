@@ -11,7 +11,7 @@ public partial class MainView : UserControl
 {
     private MainViewModel _mainViewModel;
     
-    private static readonly string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "D4Macro","quickSave.json");
+    
     
     public MainView()
     {
@@ -29,7 +29,7 @@ public partial class MainView : UserControl
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        var settings = new InputModel
+        var settings = new DataModel
         {
             Key1Interval = int.TryParse(Key1IntervalTextBox.Text, out int key1Interval) ? key1Interval : 0,
             Key1CheckBox = Key1CheckBox.IsChecked == true,
@@ -45,14 +45,14 @@ public partial class MainView : UserControl
             MouseRightCheckBox = MouseRightCheckBox.IsChecked == true,
         };
 
-        InputModel.SaveSettings(settings, SettingsFilePath);
+        DataModel.SaveSettings(settings, App.DataFilePath);
     }
 
     private void LoadButton_Click(object sender, RoutedEventArgs e)
     {
-        if (File.Exists(SettingsFilePath))
+        if (File.Exists(App.DataFilePath))
         {
-            _mainViewModel.InputModel = InputModel.LoadSettings(SettingsFilePath);
+            _mainViewModel.DataModel = DataModel.LoadSettings(App.DataFilePath);
         }
         else
         {

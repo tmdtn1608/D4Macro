@@ -128,8 +128,8 @@ public partial class MainWindow : Window
             string filePath = openFileDialog.FileName;
             try
             {
-                InputModel jsonObject = InputModel.LoadSettings(filePath);
-                _mainViewModel.InputModel = jsonObject;
+                DataModel jsonObject = DataModel.LoadSettings(filePath);
+                _mainViewModel.DataModel = jsonObject;
             }
             catch (Exception ex)
             {
@@ -148,7 +148,7 @@ public partial class MainWindow : Window
             string filePath = saveFileDialog.FileName;
             try
             {
-                InputModel.SaveSettings(_mainViewModel.InputModel,filePath);
+                DataModel.SaveSettings(_mainViewModel.DataModel,filePath);
                 MessageBox.Show("매크로 데이터 저장 성공");
             }
             catch (Exception ex)

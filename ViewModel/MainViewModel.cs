@@ -43,20 +43,20 @@ public class MainViewModel : BaseViewModel
         set { _executeButtonText = value; }
     }
 
-    private InputModel _inputModel;
-    public InputModel InputModel
+    private DataModel _dataModel;
+    public DataModel DataModel
     {
-        get { return _inputModel;}
+        get { return _dataModel;}
         set
         {
-            _inputModel = value;
-            OnPropertyChanged(nameof(InputModel));
+            _dataModel = value;
+            OnPropertyChanged(nameof(DataModel));
         }
     }
 
     public MainViewModel()
     {
-        InputModel = new InputModel();
+        DataModel = new DataModel();
         _shutdownCommand = new ShutdownCommand(this);
         InitializeMacroTimers();
     }
@@ -120,39 +120,39 @@ public class MainViewModel : BaseViewModel
         IsMacroRunning = !IsMacroRunning;
         if (IsMacroRunning)
         {
-            if (InputModel.Key1CheckBox == true && InputModel.Key1Interval != 0)
+            if (DataModel.Key1CheckBox == true && DataModel.Key1Interval != 0)
             {
-                _key1Timer.Interval = TimeSpan.FromMilliseconds(InputModel.Key1Interval);
+                _key1Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key1Interval);
                 _key1Timer.Start();
             }
 
-            if (InputModel.Key2CheckBox == true && InputModel.Key2Interval != 0)
+            if (DataModel.Key2CheckBox == true && DataModel.Key2Interval != 0)
             {
-                _key2Timer.Interval = TimeSpan.FromMilliseconds(InputModel.Key2Interval);
+                _key2Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key2Interval);
                 _key2Timer.Start();
             }
 
-            if (InputModel.Key3CheckBox == true && InputModel.Key3Interval != 0)
+            if (DataModel.Key3CheckBox == true && DataModel.Key3Interval != 0)
             {
-                _key3Timer.Interval = TimeSpan.FromMilliseconds(InputModel.Key3Interval);
+                _key3Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key3Interval);
                 _key3Timer.Start();
             }
 
-            if (InputModel.Key4CheckBox == true && InputModel.Key4Interval != 0)
+            if (DataModel.Key4CheckBox == true && DataModel.Key4Interval != 0)
             {
-                _key4Timer.Interval = TimeSpan.FromMilliseconds(InputModel.Key4Interval);
+                _key4Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key4Interval);
                 _key4Timer.Start();
             }
 
-            if (InputModel.MouseLeftCheckBox == true && InputModel.MouseLeftInterval != 0)
+            if (DataModel.MouseLeftCheckBox == true && DataModel.MouseLeftInterval != 0)
             {
-                _mouseLeftTimer.Interval = TimeSpan.FromMilliseconds(InputModel.MouseLeftInterval);
+                _mouseLeftTimer.Interval = TimeSpan.FromMilliseconds(DataModel.MouseLeftInterval);
                 _mouseLeftTimer.Start();
             }
 
-            if (InputModel.MouseRightCheckBox == true && InputModel.MouseRightInterval != 0)
+            if (DataModel.MouseRightCheckBox == true && DataModel.MouseRightInterval != 0)
             {
-                _mouseRightTimer.Interval = TimeSpan.FromMilliseconds(InputModel.MouseRightInterval);
+                _mouseRightTimer.Interval = TimeSpan.FromMilliseconds(DataModel.MouseRightInterval);
                 _mouseRightTimer.Start();
             }
         }
