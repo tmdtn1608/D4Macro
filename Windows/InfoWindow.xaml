@@ -5,9 +5,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:D4Macro.Windows"
         mc:Ignorable="d"
-        Title="정보" Height="240" Width="300">
+        ResizeMode="NoResize"
+        Title="정보" Height="270" Width="310">
     <Grid>
         <StackPanel Margin="10">
+            <TextBlock FontWeight="Bold" FontSize="15" HorizontalAlignment="Center" Margin="0 0 0 10">D4Macro</TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Width="80">Developer</TextBlock>
                 <TextBlock>Xcient</TextBlock>
