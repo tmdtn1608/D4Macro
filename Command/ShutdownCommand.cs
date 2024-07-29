@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using D4Macro.ViewModel;
 
-namespace D4Macro;
+namespace D4Macro.Command;
 
 public class ShutdownCommand(MainViewModel mainViewModel) : ICommand
 {

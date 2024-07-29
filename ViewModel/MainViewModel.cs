@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using System.Windows.Threading;
+using D4Macro.Command;
 using D4Macro.Model;
 using D4Macro.Util;
 using Hardcodet.Wpf.TaskbarNotification;

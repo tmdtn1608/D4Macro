@@ -5,7 +5,7 @@ using D4Macro.Model;
 using D4Macro.ViewModel;
 using MessageBox = System.Windows.Forms.MessageBox;
 
-namespace D4Macro;
+namespace D4Macro.View;
 
 public partial class MainView : UserControl
 {
