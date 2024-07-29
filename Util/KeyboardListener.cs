@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
-namespace D4Macro.Command;
+namespace D4Macro.Util;
 
 public class KeyboardListener : IDisposable
 {

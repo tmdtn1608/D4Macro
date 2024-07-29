@@ -2,7 +2,7 @@
 using System.Timers;
 using Timer = System.Timers.Timer;
 
-namespace D4Macro.Command;
+namespace D4Macro.Util;
 
 public class ProcessMonitor : IDisposable
 {
@@ -14,7 +14,7 @@ public class ProcessMonitor : IDisposable
     public ProcessMonitor(string processName)
     {
         _processName = processName;
-        _timer = new Timer(1000); // Check every second
+        _timer = new Timer(1000);
         _timer.Elapsed += CheckProcess;
         _timer.Start();
     }

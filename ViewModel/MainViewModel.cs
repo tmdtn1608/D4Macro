@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using System.Windows.Threading;
-using D4Macro.Command;
 using D4Macro.Command.Model;
+using D4Macro.Util;
 using Hardcodet.Wpf.TaskbarNotification;
 using WindowsInput;
 using WindowsInput.Native;
