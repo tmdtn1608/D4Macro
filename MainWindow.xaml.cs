@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using D4Macro.Command;
 using D4Macro.Model;
 using D4Macro.ViewModel;
 using Hardcodet.Wpf.TaskbarNotification;
@@ -21,19 +22,17 @@ public partial class MainWindow : Window
     private bool _isApplicationClosing;
     private KeyboardListener _keyboardListener;
     private const string ProcessName = "Diablo IV";
-    private const int HOTKEY_ID = 9000;
-    private const uint MOD_NOREPEAT = 0x4000;
-    // private const uint VK_F12 = 0x7B;
-    private const uint VK_F12 = 0x73;
-    private Icon icon = new System.Drawing.Icon(Application.GetResourceStream(new Uri("pack://application:,,,/Resources/devil.ico")).Stream);
+    private readonly Icon _icon = new Icon(Application.GetResourceStream(new Uri("pack://application:,,,/Resources/devil.ico")).Stream);
     private MainViewModel _mainViewModel;
+    
     public MainWindow()
     {
         InitializeComponent();
+        _mainViewModel = new MainViewModel();
         InitializeTrayIcon();
         CheckTargetProcess();
         InitializeKeyboardHook();
-        _mainViewModel = new MainViewModel();
+        
         DataContext = _mainViewModel;
     }
 
@@ -41,7 +40,7 @@ public partial class MainWindow : Window
     {
         _notifyIcon = new TaskbarIcon
         {
-            Icon = icon,
+            Icon = _icon,
             ToolTipText = "D4Macro"
         };
         _notifyIcon.TrayMouseDoubleClick += NotifyIcon_TrayMouseDoubleClick;
@@ -51,6 +50,14 @@ public partial class MainWindow : Window
         exitMenuItem.Click += (sender, args) => ApplicationTerminate();
         contextMenu.Items.Add(exitMenuItem);
         _notifyIcon.ContextMenu = contextMenu;
+        
+        _mainViewModel.TaskbarIcon = _notifyIcon;
+    }
+    private void NotifyIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
+    {
+        Show();
+        WindowState = WindowState.Normal;
+        ShowInTaskbar = true;
     }
     
     private void InitializeKeyboardHook()
@@ -68,12 +75,6 @@ public partial class MainWindow : Window
         }
     }
 
-    private void NotifyIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
-    {
-        Show();
-        WindowState = WindowState.Normal;
-        ShowInTaskbar = true;
-    }
 
     private void Window_StateChanged(object sender, EventArgs e)
     {
@@ -98,44 +99,24 @@ public partial class MainWindow : Window
         }
     }
 
-    // TODO : ApplicationTerminate -> Command로 위임
-    public void ApplicationTerminate()
+    private void ApplicationTerminate()
     {
-        HotkeyManager.Current.Remove("ToggleMacro");
-        _processMonitor?.Dispose();
-        _notifyIcon?.Dispose();
-        // 타이머가 있다면 종료
-        foreach (var dispatcherTimer in _mainViewModel.GetAllTimer())
-        {
-            dispatcherTimer?.Stop();
-        }
-
-        // Dispatcher 종료
-        Application.Current.Dispatcher.InvokeShutdown();
-
-        // 애플리케이션 종료
-        Application.Current.Shutdown();
+        _mainViewModel.ShutdownAction?.Invoke(null);
     }
     private void ApplicationTerminate(object sender, RoutedEventArgs e)
     {
-        ApplicationTerminate();
+        _mainViewModel.ShutdownAction?.Invoke(null);
     }
 
     private void CheckTargetProcess()
     {
-        _processMonitor = new ProcessMonitor("chrome");
+        _processMonitor = new ProcessMonitor("notepad");
         _processMonitor.ProcessExited += (s, e) =>
         {
             _isApplicationClosing = true;
             Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
         };
-    }
-
-    private void OnToggleMacro(object sender, HotkeyEventArgs e)
-    {
-        var viewModel = (MainViewModel)DataContext;
-        viewModel.ToggleMacro();
-        e.Handled = true;
+        _mainViewModel.ProcessMonitor = _processMonitor;
     }
 
     private void Import_Setting(object sender, RoutedEventArgs e)

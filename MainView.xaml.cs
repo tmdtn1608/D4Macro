@@ -11,7 +11,7 @@ public partial class MainView : UserControl
 {
     private MainViewModel _mainViewModel;
     
-    private static readonly string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "quickSave.json");
+    private static readonly string SettingsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "D4Macro","quickSave.json");
     
     public MainView()
     {

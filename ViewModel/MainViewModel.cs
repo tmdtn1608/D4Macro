@@ -1,6 +1,9 @@
-﻿using System.Windows.Input;
+﻿using System.Collections;
+using System.Windows.Input;
 using System.Windows.Threading;
+using D4Macro.Command;
 using D4Macro.Model;
+using Hardcodet.Wpf.TaskbarNotification;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -8,6 +11,11 @@ namespace D4Macro.ViewModel;
 
 public class MainViewModel : BaseViewModel
 {
+    private readonly ICommand _shutdownCommand;
+    public Action<object> ShutdownAction => _shutdownCommand.Execute;
+    public ProcessMonitor ProcessMonitor { get; set; }
+    public TaskbarIcon TaskbarIcon { get; set; }
+    
     private DispatcherTimer _key1Timer;
     private DispatcherTimer _key2Timer;
     private DispatcherTimer _key3Timer;
@@ -46,11 +54,10 @@ public class MainViewModel : BaseViewModel
         }
     }
 
-    public ICommand ToggleMacroCommand { get; }
-
     public MainViewModel()
     {
         InputModel = new InputModel();
+        _shutdownCommand = new ShutdownCommand(this);
         InitializeMacroTimers();
     }
 
@@ -63,9 +70,9 @@ public class MainViewModel : BaseViewModel
         list.Add(_key4Timer);
         list.Add(_mouseLeftTimer);
         list.Add(_mouseRightTimer);
-
         return list;
     }
+    
     private void InitializeMacroTimers()
     {
         _key1Timer = new DispatcherTimer();
@@ -85,6 +92,8 @@ public class MainViewModel : BaseViewModel
 
         _mouseRightTimer = new DispatcherTimer();
         _mouseRightTimer.Tick += (sender, e) => ExecuteMouseAction(false);
+        
+        
     }
     
     private void ExecuteMacroAction(VirtualKeyCode keyCode)
@@ -157,4 +166,6 @@ public class MainViewModel : BaseViewModel
             _mouseRightTimer.Stop();
         }
     }
+
+    
 }
