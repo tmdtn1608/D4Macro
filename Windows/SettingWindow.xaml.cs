@@ -4,7 +4,7 @@ using System.Windows.Input;
 using D4Macro.Model;
 using D4Macro.Util;
 
-namespace D4Macro;
+namespace D4Macro.Windows;
 
 public partial class SettingWindow : Window
 {
@@ -19,9 +19,7 @@ public partial class SettingWindow : Window
         };
         // 실행키 변경 ComboBoxItem 생성
         Loaded += SetLaunchComboboxItem;
-        // TODO : 설정 변경시 설정JSON 변경
-        // TODO : 실행키 변경기능 F1~F12
-        // TODO : 디아블로4 종료시 같이 종료 / 남아있기
+        
         // 닫을때 자동저장
         this.Closed += SaveConfig;
     }

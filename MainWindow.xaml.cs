@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using D4Macro;
 using D4Macro.Model;
 using D4Macro.Util;
 using D4Macro.ViewModel;
@@ -67,7 +66,7 @@ public partial class MainWindow : Window
 
     private void OnKeyPressed(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.F12)
+        if (e.Key == App.ConfigModel.LaunchKey)
         {
             var viewModel = (MainViewModel)DataContext;
             viewModel.ToggleMacro();
@@ -86,11 +85,18 @@ public partial class MainWindow : Window
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
-        if (!_isApplicationClosing)
+        if (App.ConfigModel.ActiveTray)
         {
-            e.Cancel = true;
-            Hide();
-            ShowInTaskbar = false;
+            if (!_isApplicationClosing)
+            {
+                e.Cancel = true;
+                Hide();
+                ShowInTaskbar = false;
+            }
+            else
+            {
+                ApplicationTerminate();
+            }
         }
         else
         {
@@ -113,7 +119,19 @@ public partial class MainWindow : Window
         _processMonitor.ProcessExited += (s, e) =>
         {
             _isApplicationClosing = true;
-            Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _mainViewModel.ProcessMonitor?.Dispose();
+                _mainViewModel.TaskbarIcon?.Dispose();
+                // 타이머가 있다면 종료
+                foreach (var dispatcherTimer in _mainViewModel.GetAllTimer())
+                {
+                    dispatcherTimer?.Stop();
+                }
+
+                // Dispatcher 종료
+                Application.Current.Shutdown();
+            });
         };
         _mainViewModel.ProcessMonitor = _processMonitor;
     }

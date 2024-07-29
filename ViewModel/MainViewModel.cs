@@ -35,7 +35,6 @@ public class MainViewModel : BaseViewModel
             OnPropertyChanged(nameof(ButtonText));
         }
     }
-    // TODO : LaunchKey 변경시 적용
     private string _executeButtonText = $"실행({App.ConfigModel.LaunchKey})";
     
     public string ButtonText

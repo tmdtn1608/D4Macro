@@ -2,7 +2,6 @@
 using System.Windows;
 using D4Macro.Model;
 using D4Macro.Util;
-using Newtonsoft.Json;
 
 namespace D4Macro;
 

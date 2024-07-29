@@ -10,7 +10,6 @@ public class ShutdownCommand(MainViewModel mainViewModel) : ICommand
 
     public void Execute(object? parameter)
     {
-        // TODO : 필요하지 않은 처리가 있다면 제거
         mainViewModel.ProcessMonitor?.Dispose();
         mainViewModel.TaskbarIcon?.Dispose();
         // 타이머가 있다면 종료

@@ -22,7 +22,8 @@ public class ProcessMonitor : IDisposable
     private void CheckProcess(object sender, ElapsedEventArgs e)
     {
         var processes = Process.GetProcessesByName(_processName);
-        if (!processes.Any())
+        
+        if (!processes.Any() && App.ConfigModel.WithKill)
         {
             _timer.Stop();
             ProcessExited?.Invoke(this, EventArgs.Empty);

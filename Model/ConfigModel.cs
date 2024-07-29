@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Newtonsoft.Json;
 
 namespace D4Macro.Model;
@@ -47,6 +45,7 @@ public class ConfigModel : BaseModel
         }
     }
     
+    [JsonIgnore]
     public string ButtonText
     {
         get
