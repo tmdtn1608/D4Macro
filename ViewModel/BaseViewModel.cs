@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace D4Macro.Command.ViewModel;
+namespace D4Macro.ViewModel;
 
 public class BaseViewModel : INotifyPropertyChanged
 {

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace D4Macro.Command;
+namespace D4Macro;
 
 /// <summary>
 /// Interaction logic for App.xaml

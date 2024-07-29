@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using D4Macro.Command;
-using D4Macro.Command.Model;
-using D4Macro.Command.ViewModel;
+using D4Macro;
+using D4Macro.Model;
+using D4Macro.ViewModel;
 using D4Macro.Util;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
