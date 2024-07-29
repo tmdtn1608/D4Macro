@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
 using D4Macro.Model;
+using D4Macro.Util;
 using Newtonsoft.Json;
 
 namespace D4Macro;
@@ -10,17 +11,9 @@ namespace D4Macro;
 /// </summary>
 public partial class App : Application
 {
-    private static readonly string SettingsFilePath =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "D4Macro", "config.json");
-    public static readonly string DataFilePath = 
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "D4Macro","quickSave.json");
-    private static ConfigModel _configModel = new ConfigModel();
 
-    public static ConfigModel ConfigModel
-    {
-        get { return _configModel; }
-        set { _configModel = value; }
-    }
+
+    public static ConfigModel ConfigModel { get; set; } = new ConfigModel();
     public App()
     {
         InitializeConfig();
@@ -36,14 +29,13 @@ public partial class App : Application
             {
                 Directory.CreateDirectory(appDir);
             }
-            if (!File.Exists(SettingsFilePath))
+            if (!File.Exists(Const.SETTING_FILE_PATH))
             {
-                CreateJson();
+                JsonController.Instance.WriteJson(ConfigModel, Const.SETTING_FILE_PATH);
             }
             else
             {
-                var config = File.ReadAllText(SettingsFilePath);
-                ConfigModel = JsonConvert.DeserializeObject<ConfigModel>(config);
+                ConfigModel = JsonController.Instance.ReadJson<ConfigModel>(Const.SETTING_FILE_PATH);
             }
         }
         catch(Exception e)
@@ -57,11 +49,5 @@ public partial class App : Application
                 Current.Shutdown();
             }
         }
-    }
-
-    private void CreateJson()
-    {
-        var config = JsonConvert.SerializeObject(ConfigModel, Formatting.Indented);
-        File.WriteAllText(SettingsFilePath, config);
     }
 }

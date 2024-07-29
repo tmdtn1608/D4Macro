@@ -30,17 +30,22 @@ public class MainViewModel : BaseViewModel
         set
         {
             _isMacroRunning = value;
-            if (!IsMacroRunning) _executeButtonText = "실행";
-            else _executeButtonText = "중단";
+            if (!IsMacroRunning) _executeButtonText = $"실행({App.ConfigModel.LaunchKey})";
+            else _executeButtonText = $"중단({App.ConfigModel.LaunchKey})";
             OnPropertyChanged(nameof(ButtonText));
         }
     }
-    private string _executeButtonText = "실행";
+    // TODO : LaunchKey 변경시 적용
+    private string _executeButtonText = $"실행({App.ConfigModel.LaunchKey})";
     
     public string ButtonText
     {
         get { return _executeButtonText;}
-        set { _executeButtonText = value; }
+        set
+        {
+            _executeButtonText = value;
+            OnPropertyChanged(nameof(ButtonText));
+        }
     }
 
     private DataModel _dataModel;
@@ -59,6 +64,14 @@ public class MainViewModel : BaseViewModel
         DataModel = new DataModel();
         _shutdownCommand = new ShutdownCommand(this);
         InitializeMacroTimers();
+        App.ConfigModel.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == nameof(App.ConfigModel.LaunchKey))
+            {
+                if (!IsMacroRunning) ButtonText = $"실행({App.ConfigModel.LaunchKey})";
+                else ButtonText = $"중단({App.ConfigModel.LaunchKey})";
+            }
+        };
     }
 
     public List<DispatcherTimer> GetAllTimer()

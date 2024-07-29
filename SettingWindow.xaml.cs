@@ -1,5 +1,8 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using D4Macro.Model;
+using D4Macro.Util;
 
 namespace D4Macro;
 
@@ -9,17 +12,70 @@ public partial class SettingWindow : Window
     public SettingWindow()
     {
         InitializeComponent();
-        Loaded += GetConfig;
-        // TODO : Appdata에서 설정JSON 가져오기
+        // Appdata에서 설정JSON 가져오기
+        Loaded += (sender, args) =>
+        {
+            DataContext = _configModel;
+        };
+        // 실행키 변경 ComboBoxItem 생성
+        Loaded += SetLaunchComboboxItem;
         // TODO : 설정 변경시 설정JSON 변경
         // TODO : 실행키 변경기능 F1~F12
         // TODO : 디아블로4 종료시 같이 종료 / 남아있기
-        // TODO : 빠른저장 삭제
+        // 닫을때 자동저장
+        this.Closed += SaveConfig;
     }
 
-    private void GetConfig(object sender, RoutedEventArgs e)
+    private void SetLaunchComboboxItem(object sender, RoutedEventArgs e)
     {
-        
-        DataContext = _configModel;
+        foreach (Const.LaunchKeyEnum key in Enum.GetValues(typeof(Const.LaunchKeyEnum)))
+        {
+            ComboBoxItem item = new ComboBoxItem
+            {
+                Content = key.ToString(),
+                Tag = (Key)key
+            };
+            LaunchComboBox.Items.Add(item);
+
+            if ((Key)key == _configModel.LaunchKey)
+            {
+                LaunchComboBox.SelectedItem = item;
+            }
+        }
+
     }
+    private void ChangeLaunchKey(object sender, SelectionChangedEventArgs e)
+    {
+        if (LaunchComboBox.SelectedItem is ComboBoxItem selectedItem)
+        {
+            // 선택된 ComboBoxItem의 Tag 값을 모델에 반영
+            _configModel.LaunchKey = (Key)selectedItem.Tag;
+        }
+    }
+
+    private void SaveConfig(object? sender, EventArgs e)
+    {
+        JsonController.Instance.WriteJson(App.ConfigModel, Const.SETTING_FILE_PATH);
+    }
+    private void ResetConfig(object sender, RoutedEventArgs e)
+    {
+        App.ConfigModel = new ConfigModel();
+        _configModel = App.ConfigModel;
+        DataContext = _configModel;
+        foreach (ComboBoxItem item in LaunchComboBox.Items)
+        {
+            if ((Key)item.Tag == _configModel.LaunchKey)
+            {
+                LaunchComboBox.SelectedItem = item;
+                break;
+            }
+        }
+    }
+
+    private void ResetQuickSave(object sender, RoutedEventArgs e)
+    {
+        JsonController.Instance.DeleteJson(Const.DATA_FILE_PATH);
+        MessageBox.Show("성공적으로 초기화 되었습니다");
+    }
+
 }

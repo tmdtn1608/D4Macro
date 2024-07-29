@@ -16,6 +16,7 @@ public class ConfigModel : BaseModel
         set
         {
             _launchKey = value;
+            OnPropertyChanged(nameof(ButtonText));
             OnPropertyChanged(nameof(LaunchKey));
         }
     }
@@ -30,6 +31,27 @@ public class ConfigModel : BaseModel
         {
             _activeTray = value;
             OnPropertyChanged(nameof(ActiveTray));
+        }
+    }
+
+    private bool _withKill = true;
+
+    [JsonProperty(nameof(WithKill))]
+    public bool WithKill
+    {
+        get { return _withKill; }
+        set
+        {
+            _withKill = value;
+            OnPropertyChanged(nameof(WithKill));
+        }
+    }
+    
+    public string ButtonText
+    {
+        get
+        {
+            return $"({LaunchKey.ToString()})";
         }
     }
 }

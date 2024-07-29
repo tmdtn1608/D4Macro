@@ -20,7 +20,6 @@ public partial class MainWindow : Window
     private ProcessMonitor _processMonitor;
     private bool _isApplicationClosing;
     private KeyboardListener _keyboardListener;
-    private const string ProcessName = "Diablo IV";
     private readonly Icon _icon = new Icon(Application.GetResourceStream(new Uri("pack://application:,,,/Resources/devil.ico")).Stream);
     private MainViewModel _mainViewModel;
     
@@ -128,8 +127,7 @@ public partial class MainWindow : Window
             string filePath = openFileDialog.FileName;
             try
             {
-                DataModel jsonObject = DataModel.LoadSettings(filePath);
-                _mainViewModel.DataModel = jsonObject;
+                _mainViewModel.DataModel = JsonController.Instance.ReadJson<DataModel>(filePath);
             }
             catch (Exception ex)
             {
@@ -148,7 +146,7 @@ public partial class MainWindow : Window
             string filePath = saveFileDialog.FileName;
             try
             {
-                DataModel.SaveSettings(_mainViewModel.DataModel,filePath);
+                JsonController.Instance.WriteJson(_mainViewModel.DataModel,filePath);
                 MessageBox.Show("매크로 데이터 저장 성공");
             }
             catch (Exception ex)
@@ -162,5 +160,10 @@ public partial class MainWindow : Window
     {
         SettingWindow settingsWindow = new SettingWindow();
         settingsWindow.ShowDialog();
+    }
+
+    private void ViewInfo(object sender, RoutedEventArgs e)
+    {
+        // TODO : 제작자 정보 보여주기
     }
 }

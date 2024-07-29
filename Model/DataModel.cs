@@ -145,20 +145,4 @@ public class DataModel : BaseModel
             OnPropertyChanged(nameof(MouseRightInterval));
         }
     }
-    
-    public static void SaveSettings(DataModel settings, string filePath)
-    {
-        var json = JsonConvert.SerializeObject(settings, Formatting.Indented);
-        File.WriteAllText(filePath, json);
-    }
-
-    public static DataModel LoadSettings(string filePath)
-    {
-        if (!File.Exists(filePath))
-            return new DataModel();
-
-        var json = File.ReadAllText(filePath);
-        return JsonConvert.DeserializeObject<DataModel>(json);
-    }
-
 }

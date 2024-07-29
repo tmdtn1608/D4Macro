@@ -17,13 +17,14 @@
             <RowDefinition Height="*"/> <!-- Main content -->
         </Grid.RowDefinitions>
         <Menu Background="White">
-            <MenuItem Header="_Edit">
+            <MenuItem Header="_Menu">
                 <!-- <MenuItem Command="ApplicationCommands.Copy"/> -->
                 <!-- <MenuItem Command="ApplicationCommands.Cut"/> -->
                 <!-- <MenuItem Command="ApplicationCommands.Paste"/> -->
                 <MenuItem Header="Import" Click="Import_Setting"/>
                 <MenuItem Header="Export" Click="Export_Setting"/>
                 <MenuItem Header="Config" Click="SetConfig"/>
+                <MenuItem Header="Info" Click="ViewInfo"/>
                 <MenuItem Header="Exit" Click="ApplicationTerminate"/>
             </MenuItem>
         </Menu>

@@ -8,7 +8,8 @@
         xmlns:m="clr-namespace:D4Macro.Model"
         xmlns:u="clr-namespace:D4Macro.Util"
         mc:Ignorable="d"
-        Title="Config" Height="330" Width="330">
+        ResizeMode="NoResize"
+        Title="Config" Height="300" Width="300">
     <Window.DataContext>
         <m:ConfigModel/>
     </Window.DataContext>
@@ -16,12 +17,44 @@
         <u:KeyConverter x:Key="KeyConverter" />
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="{Binding LaunchKey, Converter={StaticResource KeyConverter}}"/>
-        
-        <TextBlock Grid.Row="1" Text="{Binding ActiveTray}"/>
+        <StackPanel Margin="10">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock VerticalAlignment="Center" Width="150">실행키</TextBlock>
+                <ComboBox x:Name="LaunchComboBox" Width="80" SelectionChanged="ChangeLaunchKey"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock VerticalAlignment="Center" Width="150">종료시 트레이로 이동</TextBlock>
+                <CheckBox x:Name="ActiveTray" IsChecked="{Binding ActiveTray}"></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock VerticalAlignment="Center" Width="150">디아블로 종료시 자동종료</TextBlock>
+                <CheckBox x:Name="WithKill" IsChecked="{Binding WithKill}"></CheckBox>
+                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock VerticalAlignment="Center" Width="150">빠른저장 초기화</TextBlock>
+                <Button Width="60" Click="ResetQuickSave">초기화</Button>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock VerticalAlignment="Center" Width="150">설정 초기화</TextBlock>
+                <Button Width="60" Click="ResetConfig">초기화</Button>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock VerticalAlignment="Center" Width="150">저장데이터경로 (구현예정)</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBox Width="200" IsEnabled="False"></TextBox>
+                <Button IsEnabled="False" Margin="5,0,0,0" Width="40">선택</Button>
+            </StackPanel>
+        </StackPanel>
+        <!-- <Grid.RowDefinitions> -->
+        <!--     <RowDefinition Height="Auto"/> -->
+        <!--     <RowDefinition Height="Auto"/> -->
+        <!-- </Grid.RowDefinitions> -->
+        <!-- <TextBlock Text="{Binding LaunchKey, Converter={StaticResource KeyConverter}}"/> -->
+        <!-- -->
+        <!-- <TextBlock Grid.Row="1" Text="{Binding ActiveTray}"/> -->
     </Grid>
 </Window>

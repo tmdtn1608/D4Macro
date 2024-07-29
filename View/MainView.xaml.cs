@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using D4Macro.Model;
+using D4Macro.Util;
 using D4Macro.ViewModel;
 using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -45,14 +46,14 @@ public partial class MainView : UserControl
             MouseRightCheckBox = MouseRightCheckBox.IsChecked == true,
         };
 
-        DataModel.SaveSettings(settings, App.DataFilePath);
+        JsonController.Instance.WriteJson(settings, Const.DATA_FILE_PATH);
     }
 
     private void LoadButton_Click(object sender, RoutedEventArgs e)
     {
-        if (File.Exists(App.DataFilePath))
+        if (File.Exists(Const.DATA_FILE_PATH))
         {
-            _mainViewModel.DataModel = DataModel.LoadSettings(App.DataFilePath);
+            _mainViewModel.DataModel = JsonController.Instance.ReadJson<DataModel>(Const.DATA_FILE_PATH);
         }
         else
         {
