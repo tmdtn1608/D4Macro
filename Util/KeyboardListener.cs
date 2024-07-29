@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
-namespace D4Macro;
+namespace D4Macro.Command;
 
 public class KeyboardListener : IDisposable
 {
@@ -14,8 +14,6 @@ public class KeyboardListener : IDisposable
     private IntPtr _hookID = IntPtr.Zero;
 
     public event EventHandler<KeyEventArgs> KeyPressed;
-
-    public event EventHandler<KeyEventArgs> KeyReleased; 
 
     public KeyboardListener()
     {

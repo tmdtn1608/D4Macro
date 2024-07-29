@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using D4Macro.ViewModel;
+using D4Macro.Command.ViewModel;
 using NHotkey.Wpf;
 
 namespace D4Macro.Command;

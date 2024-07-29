@@ -2,12 +2,12 @@
 using System.Windows.Input;
 using System.Windows.Threading;
 using D4Macro.Command;
-using D4Macro.Model;
+using D4Macro.Command.Model;
 using Hardcodet.Wpf.TaskbarNotification;
 using WindowsInput;
 using WindowsInput.Native;
 
-namespace D4Macro.ViewModel;
+namespace D4Macro.Command.ViewModel;
 
 public class MainViewModel : BaseViewModel
 {

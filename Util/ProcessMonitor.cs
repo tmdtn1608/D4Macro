@@ -2,7 +2,7 @@
 using System.Timers;
 using Timer = System.Timers.Timer;
 
-namespace D4Macro;
+namespace D4Macro.Command;
 
 public class ProcessMonitor : IDisposable
 {

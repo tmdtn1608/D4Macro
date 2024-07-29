@@ -1,7 +1,7 @@
-﻿<Application x:Class="D4Macro.App"
+﻿<Application x:Class="D4Macro.Command.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:D4Macro"
+             xmlns:local="clr-namespace:D4Macro.Command"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

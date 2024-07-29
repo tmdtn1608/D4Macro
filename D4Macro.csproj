@@ -10,10 +10,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Command\" />
       <Folder Include="Model\" />
       <Folder Include="ViewModel\" />
-      <Folder Include="View\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,6 +27,15 @@
       <Resource Include="Resources\devil.ico">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Page Update="View\MainView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
 </Project>

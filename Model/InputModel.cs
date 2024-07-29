@@ -2,7 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace D4Macro.Model;
+namespace D4Macro.Command.Model;
 
 public class InputModel : INotifyPropertyChanged
 {

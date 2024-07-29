@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace D4Macro;
+namespace D4Macro.Command;
 
 public partial class SettingWindow : Window
 {
