@@ -78,6 +78,18 @@ public class MainViewModel : BaseViewModel
         }
     }
 
+    private string _dataName;
+
+    public string DataName
+    {
+        get { return _dataName; }
+        set
+        {
+            _dataName = value;
+            OnPropertyChanged(nameof(DataName));
+        }
+    }
+
     public MainViewModel()
     {
         DataModel = new DataModel();

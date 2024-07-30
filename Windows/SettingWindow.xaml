@@ -20,12 +20,12 @@
                 <ComboBox x:Name="LaunchComboBox" Width="80" SelectionChanged="ChangeLaunchKey"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <TextBlock VerticalAlignment="Center" Width="150">종료시 트레이로 이동</TextBlock>
-                <CheckBox x:Name="ActiveTray" IsChecked="{Binding ActiveTray}"></CheckBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock VerticalAlignment="Center" Width="150">실행시 디아블로 실행 체크</TextBlock>
                 <CheckBox x:Name="InitRunCheck" IsChecked="{Binding InitRunCheck}"></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock VerticalAlignment="Center" Width="150">종료시 트레이로 이동</TextBlock>
+                <CheckBox x:Name="ActiveTray" IsChecked="{Binding ActiveTray}"></CheckBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock VerticalAlignment="Center" Width="150">디아블로 종료시 자동종료</TextBlock>

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -145,6 +146,8 @@ public partial class MainWindow : Window
         if (openFileDialog.ShowDialog() == true)
         {
             string filePath = openFileDialog.FileName;
+            string fileName = Path.GetFileNameWithoutExtension(Path.GetFileName(filePath));
+            _mainViewModel.DataName = fileName;
             try
             {
                 _mainViewModel.DataModel = JsonController.Instance.ReadJson<DataModel>(filePath);
@@ -164,6 +167,8 @@ public partial class MainWindow : Window
         if (saveFileDialog.ShowDialog() == true)
         {
             string filePath = saveFileDialog.FileName;
+            string fileName = Path.GetFileNameWithoutExtension(Path.GetFileName(filePath));
+            _mainViewModel.DataName = fileName;
             try
             {
                 JsonController.Instance.WriteJson(_mainViewModel.DataModel,filePath);

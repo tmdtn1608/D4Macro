@@ -28,9 +28,6 @@
         </Grid.RowDefinitions>
         <Menu Background="White">
             <MenuItem Header="메뉴">
-                <!-- <MenuItem Command="ApplicationCommands.Copy"/> -->
-                <!-- <MenuItem Command="ApplicationCommands.Cut"/> -->
-                <!-- <MenuItem Command="ApplicationCommands.Paste"/> -->
                 <MenuItem Header="불러오기" Click="Import_Setting"/>
                 <MenuItem Header="내보내기" Click="Export_Setting"/>
                 <MenuItem Header="설정" Click="SetConfig"/>
@@ -40,22 +37,33 @@
         </Menu>
         <view:MainView Grid.Row="1" Margin="5" DataContext="{Binding }"/>
         <StatusBar Grid.Row="2"  DockPanel.Dock="Bottom">
-            <StatusBarItem>
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="0">
                 <TextBlock Text="{Binding IsProcessRunning, 
                 Converter={StaticResource ProcessStatus}}"/>
             </StatusBarItem>
-            <StatusBarItem>
-                <Separator/>
-            </StatusBarItem>
-            <StatusBarItem>
+            <Separator Grid.Column="1" Background="LightGray">
+            </Separator>
+            <StatusBarItem Grid.Column="2">
                 <TextBlock Text="{Binding IsMacroRunning, 
                 Converter={StaticResource MacroStatus}}"/>
             </StatusBarItem>
-            <StatusBarItem>
-                <Separator/>
-            </StatusBarItem>
-            <StatusBarItem>
-                <TextBlock HorizontalAlignment="Right">no data</TextBlock>
+            <Separator Grid.Column="3" Background="LightGray"/>
+            <StatusBarItem Grid.Column="4">
+                <TextBlock HorizontalAlignment="Right" 
+                           Text="{Binding DataName}"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

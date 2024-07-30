@@ -46,7 +46,6 @@ public partial class SettingWindow : Window
     {
         if (LaunchComboBox.SelectedItem is ComboBoxItem selectedItem)
         {
-            // 선택된 ComboBoxItem의 Tag 값을 모델에 반영
             _configModel.LaunchKey = (Key)selectedItem.Tag;
         }
     }
