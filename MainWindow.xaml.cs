@@ -116,7 +116,7 @@ public partial class MainWindow : Window
 
     private void CheckTargetProcess()
     {
-        _processMonitor = new ProcessMonitor(Const.PROCESS_NAME);
+        _processMonitor = new ProcessMonitor(Const.PROCESS_NAME, _mainViewModel);
         _processMonitor.ProcessExited += (s, e) =>
         {
             _isApplicationClosing = true;

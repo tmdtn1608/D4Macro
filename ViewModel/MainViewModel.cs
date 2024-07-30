@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using D4Macro.Command;
 using D4Macro.Model;
@@ -32,9 +33,28 @@ public class MainViewModel : BaseViewModel
             _isMacroRunning = value;
             if (!IsMacroRunning) _executeButtonText = $"실행({App.ConfigModel.LaunchKey})";
             else _executeButtonText = $"중단({App.ConfigModel.LaunchKey})";
+            OnPropertyChanged(nameof(IsMacroRunning));
             OnPropertyChanged(nameof(ButtonText));
         }
     }
+
+    private bool _isProcessRunning = false;
+
+    public bool IsProcessRunning
+    {
+        get { return _isProcessRunning; }
+        set
+        {
+            if (value == false)
+            {
+                IsMacroRunning = value;
+                ResetTimer();
+            }
+            _isProcessRunning = value;
+            OnPropertyChanged(nameof(IsProcessRunning));
+        }
+    }
+
     private string _executeButtonText = $"실행({App.ConfigModel.LaunchKey})";
     
     public string ButtonText
@@ -117,18 +137,17 @@ public class MainViewModel : BaseViewModel
     private void ExecuteMouseAction(bool isLeftClick)
     {
         InputSimulator sim = new InputSimulator();
-        if (isLeftClick)
-        {
-            sim.Mouse.LeftButtonClick();
-        }
-        else
-        {
-            sim.Mouse.RightButtonClick();
-        }
+        if (isLeftClick) sim.Mouse.LeftButtonClick();
+        else sim.Mouse.RightButtonClick();
     }
     
     public void ToggleMacro()
     {
+        if (!IsProcessRunning)
+        {
+            MessageBox.Show("디아블로가 실행중이지 않습니다");
+            return;
+        }
         IsMacroRunning = !IsMacroRunning;
         if (IsMacroRunning)
         {
@@ -170,13 +189,18 @@ public class MainViewModel : BaseViewModel
         }
         else
         {
-            _key1Timer.Stop();
-            _key2Timer.Stop();
-            _key3Timer.Stop();
-            _key4Timer.Stop();
-            _mouseLeftTimer.Stop();
-            _mouseRightTimer.Stop();
+            ResetTimer();
         }
+    }
+    
+    private void ResetTimer()
+    {
+        _key1Timer.Stop();
+        _key2Timer.Stop();
+        _key3Timer.Stop();
+        _key4Timer.Stop();
+        _mouseLeftTimer.Stop();
+        _mouseRightTimer.Stop();
     }
 
     

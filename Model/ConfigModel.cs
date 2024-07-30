@@ -44,6 +44,19 @@ public class ConfigModel : BaseModel
             OnPropertyChanged(nameof(WithKill));
         }
     }
+
+    private bool _initRunCheck = false;
+
+    [JsonProperty(nameof(InitRunCheck))]
+    public bool InitRunCheck
+    {
+        get { return _initRunCheck; }
+        set
+        {
+            _initRunCheck = value;
+            OnPropertyChanged(nameof(InitRunCheck));
+        }
+    }
     
     [JsonIgnore]
     public string ButtonText

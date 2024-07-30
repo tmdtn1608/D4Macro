@@ -10,8 +10,6 @@ namespace D4Macro;
 /// </summary>
 public partial class App : Application
 {
-
-
     public static ConfigModel ConfigModel { get; set; } = new ConfigModel();
     public App()
     {
@@ -39,7 +37,7 @@ public partial class App : Application
         }
         catch(Exception e)
         {
-            Console.WriteLine(e);
+            // Console.WriteLine(e);
             MessageBoxResult result = MessageBox.Show("설정파일을 불러오는데 실패했습니다", 
                 "Failed", MessageBoxButton.OK,
                 MessageBoxImage.Information);

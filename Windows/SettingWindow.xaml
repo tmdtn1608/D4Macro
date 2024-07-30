@@ -13,9 +13,6 @@
     <Window.DataContext>
         <m:ConfigModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <u:KeyConverter x:Key="KeyConverter" />
-    </Window.Resources>
     <Grid>
         <StackPanel Margin="10">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
@@ -27,9 +24,12 @@
                 <CheckBox x:Name="ActiveTray" IsChecked="{Binding ActiveTray}"></CheckBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock VerticalAlignment="Center" Width="150">실행시 디아블로 실행 체크</TextBlock>
+                <CheckBox x:Name="InitRunCheck" IsChecked="{Binding InitRunCheck}"></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock VerticalAlignment="Center" Width="150">디아블로 종료시 자동종료</TextBlock>
                 <CheckBox x:Name="WithKill" IsChecked="{Binding WithKill}"></CheckBox>
-                
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock VerticalAlignment="Center" Width="150">빠른저장 초기화</TextBlock>
@@ -49,12 +49,5 @@
                 <Button IsEnabled="False" Margin="5,0,0,0" Width="40">선택</Button>
             </StackPanel>
         </StackPanel>
-        <!-- <Grid.RowDefinitions> -->
-        <!--     <RowDefinition Height="Auto"/> -->
-        <!--     <RowDefinition Height="Auto"/> -->
-        <!-- </Grid.RowDefinitions> -->
-        <!-- <TextBlock Text="{Binding LaunchKey, Converter={StaticResource KeyConverter}}"/> -->
-        <!-- -->
-        <!-- <TextBlock Grid.Row="1" Text="{Binding ActiveTray}"/> -->
     </Grid>
 </Window>
