@@ -7,14 +7,16 @@
         xmlns:view="clr-namespace:D4Macro.View"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
-        Title="D4Macro" Height="320" Width="330"
+        Title="D4Macro" Height="340" Width="330"
         Icon="Resources/devil.ico"
         StateChanged="Window_StateChanged"
         Closing="Window_Closing">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/> <!-- Menu bar -->
-            <RowDefinition Height="*"/> <!-- Main content -->
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/><!-- Main content -->
         </Grid.RowDefinitions>
         <Menu Background="White">
             <MenuItem Header="메뉴">
@@ -29,5 +31,22 @@
             </MenuItem>
         </Menu>
         <view:MainView Grid.Row="1" Margin="5" DataContext="{Binding }"/>
+        <StatusBar Grid.Row="2"  DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock>Diablo is not running</TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Separator/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock>Macro is ready</TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Separator/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock HorizontalAlignment="Right">no data</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
