@@ -25,6 +25,7 @@ public partial class MainWindow : Window
     
     public MainWindow()
     {
+        // TODO : 상태표시줄 추가 (디아블로 구동상태, 매크로 실행상태, 불러온 매크로데이터 이름 등)
         InitializeComponent();
         _mainViewModel = new MainViewModel();
         InitializeTrayIcon();
@@ -115,7 +116,7 @@ public partial class MainWindow : Window
 
     private void CheckTargetProcess()
     {
-        _processMonitor = new ProcessMonitor("notepad");
+        _processMonitor = new ProcessMonitor(Const.PROCESS_NAME);
         _processMonitor.ProcessExited += (s, e) =>
         {
             _isApplicationClosing = true;
