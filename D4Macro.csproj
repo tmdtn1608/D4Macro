@@ -16,12 +16,21 @@
     <ItemGroup>
       <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
       <PackageReference Include="InputSimulator" Version="1.0.4" />
+      <PackageReference Include="NAudio" Version="2.2.1" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
 
     <ItemGroup>
       <Resource Include="Resources\devil.ico">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\off.mp3" />
+      <Resource Include="Resources\off.mp3">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\on.mp3" />
+      <Resource Include="Resources\on.mp3">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
     </ItemGroup>

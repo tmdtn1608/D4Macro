@@ -1,10 +1,13 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using D4Macro.Command;
 using D4Macro.Model;
 using D4Macro.Util;
 using Hardcodet.Wpf.TaskbarNotification;
+using NAudio.Wave;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -24,6 +27,9 @@ public class MainViewModel : BaseViewModel
     private DispatcherTimer _mouseLeftTimer;
     private DispatcherTimer _mouseRightTimer;
     
+    private IWavePlayer _waveOutDevice;
+    private WaveStream _waveStream;
+    
     private bool _isMacroRunning = false;
     public bool IsMacroRunning
     {
@@ -31,8 +37,18 @@ public class MainViewModel : BaseViewModel
         set
         {
             _isMacroRunning = value;
-            if (!IsMacroRunning) _executeButtonText = $"실행({App.ConfigModel.LaunchKey})";
-            else _executeButtonText = $"중단({App.ConfigModel.LaunchKey})";
+            if (!IsMacroRunning)
+            {
+                // off
+                PlaySound("pack://application:,,,/Resources/off.mp3");
+                _executeButtonText = $"실행({App.ConfigModel.LaunchKey})";
+            }
+            else
+            {
+                // on
+                PlaySound("pack://application:,,,/Resources/on.mp3");
+                _executeButtonText = $"중단({App.ConfigModel.LaunchKey})";
+            }
             OnPropertyChanged(nameof(IsMacroRunning));
             OnPropertyChanged(nameof(ButtonText));
         }
@@ -213,6 +229,28 @@ public class MainViewModel : BaseViewModel
         _key4Timer.Stop();
         _mouseLeftTimer.Stop();
         _mouseRightTimer.Stop();
+    }
+    
+    private void PlaySound(string resourceUri)
+    {
+        try
+        {
+            var uri = new Uri(resourceUri);
+            var resourceInfo = Application.GetResourceStream(uri);
+
+            // 리소스 스트림을 NAudio로 재생합니다
+            using (var resourceStream = resourceInfo.Stream)
+            {
+                _waveOutDevice = new WaveOut();
+                _waveStream = new Mp3FileReader(resourceStream);
+                _waveOutDevice.Init(_waveStream);
+                _waveOutDevice.Play();
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error playing sound: {ex.Message}");
+        }
     }
 
     

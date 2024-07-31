@@ -14,7 +14,6 @@ public partial class App : Application
     public App()
     {
         InitializeConfig();
-        // TODO : ON/OFF 사운드 추가
     }
 
     private void InitializeConfig()
