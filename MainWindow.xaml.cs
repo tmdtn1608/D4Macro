@@ -26,7 +26,6 @@ public partial class MainWindow : Window
     
     public MainWindow()
     {
-        // TODO : 상태표시줄 추가 (디아블로 구동상태, 매크로 실행상태, 불러온 매크로데이터 이름 등)
         InitializeComponent();
         _mainViewModel = new MainViewModel();
         InitializeTrayIcon();
