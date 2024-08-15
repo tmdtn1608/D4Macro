@@ -13,6 +13,7 @@ public static class Const
     
     public enum LaunchKeyEnum
     {
+        BackTick = 146,
         F1 = 90,
         F2 = 91,
         F3 = 92,
