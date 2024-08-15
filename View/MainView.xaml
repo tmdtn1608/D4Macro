@@ -5,11 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:D4Macro"
              xmlns:vm="clr-namespace:D4Macro.ViewModel"
+             xmlns:u="clr-namespace:D4Macro.Util"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="330">
     <UserControl.DataContext>
         <vm:MainViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <u:KeyNameConverter x:Key="KeyNameConverter"/>
+    </UserControl.Resources>
     <Grid>
         <StackPanel Margin="10">
             <TextBlock Text="매크로 주기 설정 (ms):" Margin="0,0,0,10"/>
@@ -57,9 +61,11 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Name="SaveButton" Content="빠른저장" Width="80" Margin="5" Click="SaveButton_Click"/>
-                <Button Name="LoadButton" Content="빠른불러오기" Width="80" Margin="5" Click="LoadButton_Click"/>
-                <Button Name="ToggleMacroButton" Content="{Binding ButtonText}" Width="80" Margin="5" Click="ToggleMacroButton_Click"/>
+                <Button Name="SaveButton" Content="빠른저장" Width="90" Margin="5" Click="SaveButton_Click"/>
+                <Button Name="LoadButton" Content="빠른불러오기" Width="90" Margin="5" Click="LoadButton_Click"/>
+                <Button Name="ToggleMacroButton" 
+                        Content="{Binding ButtonText, Converter={StaticResource KeyNameConverter}}" 
+                        Width="90" Margin="5" Click="ToggleMacroButton_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

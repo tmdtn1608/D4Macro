@@ -56,7 +56,7 @@ public class ProcessMonitor : IDisposable
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            _mainViewModel.IsProcessRunning = false;
+            if(_mainViewModel.IsProcessRunning) _mainViewModel.IsProcessRunning = false;
         }
         else
         {

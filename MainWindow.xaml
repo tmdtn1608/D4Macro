@@ -9,7 +9,7 @@
         xmlns:u="clr-namespace:D4Macro.Util"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
-        Title="D4Macro" Height="340" Width="330"
+        Title="D4Macro" Height="340" Width="350"
         Icon="Resources/devil.ico"
         StateChanged="Window_StateChanged"
         Closing="Window_Closing">
