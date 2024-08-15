@@ -16,7 +16,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Width="80">Version</TextBlock>
-                <TextBlock>1.0</TextBlock>
+                <TextBlock>1.1</TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Width="80">Released</TextBlock>
