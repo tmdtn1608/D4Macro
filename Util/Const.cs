@@ -8,8 +8,11 @@ public static class Const
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "D4Macro", "config.json");
     public static readonly string DATA_FILE_PATH = 
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "D4Macro","quickSave.json");
+#if DEBUG
+    public const string PROCESS_NAME = "notepad";
+#else
     public const string PROCESS_NAME = "Diablo IV";
-    // public const string PROCESS_NAME = "notepad";
+#endif
     
     public enum LaunchKeyEnum
     {

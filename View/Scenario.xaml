@@ -10,67 +10,67 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid Margin="10">
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <!-- RelativeSource를 사용하여 UserControl(Code-behind)의 Scenarios 속성에 바인딩 -->
-            <ItemsControl ItemsSource="{Binding Scenarios, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <!-- 1. 조건 선택 -->
-                            <ComboBox Width="80" 
-                                      ItemsSource="{Binding Conditions}" 
-                                      SelectedItem="{Binding SelectedCondition}"
-                                      VerticalAlignment="Center"/>
-                            
-                            <TextBlock Text=" " 
-                                       VerticalAlignment="Center" 
-                                       Margin="5,0"/>
+        <ItemsControl ItemsSource="{Binding Scenarios, RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <!-- 1. 조건 선택 -->
+                        <ComboBox Width="80" 
+                                  ItemsSource="{Binding Conditions}" 
+                                  SelectedItem="{Binding SelectedCondition}"
+                                  VerticalAlignment="Center"/>
 
-                            <!-- 2. 중간 입력 (Trigger or Timeout) -->
-                            
-                            <!-- Case A: 버튼입력 (Trigger) -->
-                            <ComboBox Width="50" 
-                                      ItemsSource="{Binding ButtonInputs}" 
-                                      SelectedItem="{Binding TriggerButton}"
-                                      Visibility="{Binding IsTriggerVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                      VerticalAlignment="Center"/>
-                            
-                            <TextBlock Text="후" 
-                                       Visibility="{Binding IsTriggerVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                       VerticalAlignment="Center" 
-                                       Margin="5,0"/>
+                        <!-- 2. 중간 입력 (Trigger or Timeout) -->
+                        
+                        <!-- Case A: 버튼입력 (Trigger) -->
+                        <ComboBox Width="50"  Margin="5,0,0,0"
+                                  ItemsSource="{Binding ButtonInputs}" 
+                                  SelectedItem="{Binding TriggerButton}"
+                                  Visibility="{Binding IsTriggerVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  VerticalAlignment="Center"/>
+                        
+                        <TextBlock Text="입력 후" 
+                                   Visibility="{Binding IsTriggerVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   VerticalAlignment="Center" 
+                                   Margin="5,0,0,0"/>
 
-                            <!-- Case B: 시간초과 (Timeout) -->
-                            <TextBox Width="50" 
-                                     Text="{Binding TimeoutValue}"
-                                     Visibility="{Binding IsTimeoutVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                     VerticalAlignment="Center"/>
+                        <!-- Case B: 시간초과 (Timeout) -->
+                        <TextBox Width="50"  Margin="5,0,0,0"
+                                 Text="{Binding TimeoutValue}"
+                                 Visibility="{Binding IsTimeoutVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 VerticalAlignment="Center"/>
 
-                            <TextBlock Text="초 후" 
-                                       Visibility="{Binding IsTimeoutVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                       VerticalAlignment="Center" 
-                                       Margin="5,0"/>
+                        <TextBlock Text="초 후" 
+                                   Visibility="{Binding IsTimeoutVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   VerticalAlignment="Center" 
+                                   Margin="5,0,0,0"/>
 
-                            <!-- 3. 실행할 동작 (Action) -->
-                            <ComboBox Width="50" 
-                                      ItemsSource="{Binding ButtonInputs}" 
-                                      SelectedItem="{Binding ActionButton}"
-                                      VerticalAlignment="Center"/>
+                        <!-- 3. 실행할 동작 (Action) -->
+                        <ComboBox Width="50" Margin="5,0,0,0"
+                                  ItemsSource="{Binding ButtonInputs}" 
+                                  SelectedItem="{Binding ActionButton}"
+                                  VerticalAlignment="Center"/>
 
-                            <TextBlock Text="실행" 
-                                       VerticalAlignment="Center" 
-                                       Margin="5,0"/>
+                        <TextBlock Text="실행" 
+                                   VerticalAlignment="Center" 
+                                   Margin="5,0"/>
 
-                            <!-- 4. 추가 버튼 -->
-                            <Button Content="추가" 
-                                    Width="50" 
-                                    Margin="10,0,0,0"
-                                    Click="AddButton_Click"
-                                    Visibility="{Binding IsLastItem, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                        <!-- 4. 추가 버튼 -->
+                        <Button Content="추가" 
+                                Width="50" 
+                                Margin="10,0,0,0"
+                                Click="AddButton_Click"
+                                Visibility="{Binding IsAddButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                        <!-- 5. 삭제 버튼 -->
+                        <Button Content="삭제" 
+                                Width="50" 
+                                Margin="5,0,0,0"
+                                Click="DeleteButton_Click"
+                                Visibility="{Binding IsDeleteButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>
