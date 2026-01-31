@@ -9,7 +9,7 @@
         xmlns:u="clr-namespace:D4Macro.Util"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
-        Title="D4Macro" Height="340" Width="350"
+        Title="D4Macro" Height="360" Width="450"
         Icon="Resources/devil.ico"
         StateChanged="Window_StateChanged"
         Closing="Window_Closing">
@@ -23,6 +23,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/> <!-- Menu bar -->
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/><!-- Main content -->
         </Grid.RowDefinitions>
@@ -35,8 +36,15 @@
                 <MenuItem Header="끝내기" Click="ApplicationTerminate"/>
             </MenuItem>
         </Menu>
-        <view:MainView Grid.Row="1" Margin="5" DataContext="{Binding }"/>
-        <StatusBar Grid.Row="2"  DockPanel.Dock="Bottom">
+        <TabControl Grid.Row="2" Margin="5">
+            <TabItem Header="기본">
+                <view:MainView DataContext="{Binding }"/>
+            </TabItem>
+            <TabItem Header="고급">
+                <view:Scenario DataContext="{Binding }"/>
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="3"  DockPanel.Dock="Bottom">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
