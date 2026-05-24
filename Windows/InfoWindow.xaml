@@ -16,11 +16,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Width="80">Version</TextBlock>
-                <TextBlock>1.1</TextBlock>
+                <TextBlock>1.2</TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Width="80">Released</TextBlock>
-                <TextBlock>2024/08/01</TextBlock>
+                <TextBlock>2026/06/01</TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Width="80">Contact</TextBlock>
@@ -28,7 +28,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Width="80">Copyright</TextBlock>
-                <TextBlock>© 2024 Xcient. All rights reserved.</TextBlock>
+                <TextBlock>© 2026 Xcient. All rights reserved.</TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Width="80">License</TextBlock>
