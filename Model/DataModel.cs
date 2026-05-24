@@ -27,6 +27,17 @@ public class DataModel : BaseModel
         }
     }
     
+    private bool _key1Hold;
+    [JsonProperty(nameof(Key1Hold))]
+    public bool Key1Hold {
+        get { return _key1Hold; }
+        set
+        {
+            _key1Hold = value;
+            OnPropertyChanged(nameof(Key1Hold));
+        }
+    }
+
     private bool _key2CheckBox;
     [JsonProperty(nameof(Key2CheckBox))]
     public bool Key2CheckBox {
@@ -50,6 +61,17 @@ public class DataModel : BaseModel
         }
     }
     
+    private bool _key2Hold;
+    [JsonProperty(nameof(Key2Hold))]
+    public bool Key2Hold {
+        get { return _key2Hold; }
+        set
+        {
+            _key2Hold = value;
+            OnPropertyChanged(nameof(Key2Hold));
+        }
+    }
+
     private bool _key3CheckBox;
     [JsonProperty(nameof(Key3CheckBox))]
     public bool Key3CheckBox {
@@ -73,6 +95,17 @@ public class DataModel : BaseModel
         }
     }
     
+    private bool _key3Hold;
+    [JsonProperty(nameof(Key3Hold))]
+    public bool Key3Hold {
+        get { return _key3Hold; }
+        set
+        {
+            _key3Hold = value;
+            OnPropertyChanged(nameof(Key3Hold));
+        }
+    }
+
     private bool _key4CheckBox;
     [JsonProperty(nameof(Key4CheckBox))]
     public bool Key4CheckBox {
@@ -93,6 +126,17 @@ public class DataModel : BaseModel
         {
             _key4Interval = value;
             OnPropertyChanged(nameof(Key4Interval));
+        }
+    }
+
+    private bool _key4Hold;
+    [JsonProperty(nameof(Key4Hold))]
+    public bool Key4Hold {
+        get { return _key4Hold; }
+        set
+        {
+            _key4Hold = value;
+            OnPropertyChanged(nameof(Key4Hold));
         }
     }
 
@@ -120,6 +164,18 @@ public class DataModel : BaseModel
         }
     }
     
+    private bool _mouseLeftHold;
+    [JsonProperty(nameof(MouseLeftHold))]
+    public bool MouseLeftHold
+    {
+        get { return _mouseLeftHold; }
+        set
+        {
+            _mouseLeftHold = value;
+            OnPropertyChanged(nameof(MouseLeftHold));
+        }
+    }
+
     private bool _mouseRightCheckBox;
     [JsonProperty(nameof(MouseRightCheckBox))]
     public bool MouseRightCheckBox
@@ -141,6 +197,18 @@ public class DataModel : BaseModel
         {
             _mouseRightInterval = value;
             OnPropertyChanged(nameof(MouseRightInterval));
+        }
+    }
+
+    private bool _mouseRightHold;
+    [JsonProperty(nameof(MouseRightHold))]
+    public bool MouseRightHold
+    {
+        get { return _mouseRightHold; }
+        set
+        {
+            _mouseRightHold = value;
+            OnPropertyChanged(nameof(MouseRightHold));
         }
     }
 }

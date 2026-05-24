@@ -8,8 +8,6 @@ using D4Macro.Model;
 using D4Macro.Util;
 using Hardcodet.Wpf.TaskbarNotification;
 using NAudio.Wave;
-using WindowsInput;
-using WindowsInput.Native;
 
 namespace D4Macro.ViewModel;
 
@@ -136,37 +134,44 @@ public class MainViewModel : BaseViewModel
     private void InitializeMacroTimers()
     {
         _key1Timer = new DispatcherTimer();
-        _key1Timer.Tick += (sender, e) => ExecuteMacroAction(VirtualKeyCode.VK_1);
+        _key1Timer.Tick += (sender, e) => ExecuteMacroAction(Key.D1, DataModel.Key1Hold);
 
         _key2Timer = new DispatcherTimer();
-        _key2Timer.Tick += (sender, e) => ExecuteMacroAction(VirtualKeyCode.VK_2);
+        _key2Timer.Tick += (sender, e) => ExecuteMacroAction(Key.D2, DataModel.Key2Hold);
 
         _key3Timer = new DispatcherTimer();
-        _key3Timer.Tick += (sender, e) => ExecuteMacroAction(VirtualKeyCode.VK_3);
+        _key3Timer.Tick += (sender, e) => ExecuteMacroAction(Key.D3, DataModel.Key3Hold);
 
         _key4Timer = new DispatcherTimer();
-        _key4Timer.Tick += (sender, e) => ExecuteMacroAction(VirtualKeyCode.VK_4);
+        _key4Timer.Tick += (sender, e) => ExecuteMacroAction(Key.D4, DataModel.Key4Hold);
 
         _mouseLeftTimer = new DispatcherTimer();
-        _mouseLeftTimer.Tick += (sender, e) => ExecuteMouseAction(true);
+        _mouseLeftTimer.Tick += (sender, e) => ExecuteMouseAction(true, DataModel.MouseLeftHold);
 
         _mouseRightTimer = new DispatcherTimer();
-        _mouseRightTimer.Tick += (sender, e) => ExecuteMouseAction(false);
-        
-        
+        _mouseRightTimer.Tick += (sender, e) => ExecuteMouseAction(false, DataModel.MouseRightHold);
     }
     
-    private void ExecuteMacroAction(VirtualKeyCode keyCode)
+    private void ExecuteMacroAction(Key keyCode, bool isHold)
     {
-        InputSimulator sim = new InputSimulator();
-        sim.Keyboard.KeyPress(keyCode);
+        if (isHold)
+            KeyboardSender.HoldKey(keyCode);
+        else
+            KeyboardSender.TapKey(keyCode);
     }
     
-    private void ExecuteMouseAction(bool isLeftClick)
+    private void ExecuteMouseAction(bool isLeftClick, bool isHold)
     {
-        InputSimulator sim = new InputSimulator();
-        if (isLeftClick) sim.Mouse.LeftButtonClick();
-        else sim.Mouse.RightButtonClick();
+        if (isLeftClick)
+        {
+            if (isHold) KeyboardSender.HoldLeftMouse();
+            else { KeyboardSender.HoldLeftMouse(); KeyboardSender.ReleaseLeftMouse(); }
+        }
+        else
+        {
+            if (isHold) KeyboardSender.HoldRightMouse();
+            else { KeyboardSender.HoldRightMouse(); KeyboardSender.ReleaseRightMouse(); }
+        }
     }
     
     public void ToggleMacro()
@@ -179,40 +184,94 @@ public class MainViewModel : BaseViewModel
         IsMacroRunning = !IsMacroRunning;
         if (IsMacroRunning)
         {
-            if (DataModel.Key1CheckBox == true && DataModel.Key1Interval != 0)
+            if (DataModel.Key1CheckBox == true)
             {
-                _key1Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key1Interval);
-                _key1Timer.Start();
+                if (DataModel.Key1Hold)
+                {
+                    ExecuteMacroAction(Key.D1, true); // 즉시 1회 입력 (딜레이 방지)
+                    _key1Timer.Interval = TimeSpan.FromMilliseconds(Const.HOLD_REPEAT_INTERVAL); // 꾹 누르는 상태(OS 연속입력) 구현을 위해 짧은 간격으로 고정
+                    _key1Timer.Start();
+                }
+                else if (DataModel.Key1Interval > 0)
+                {
+                    _key1Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key1Interval);
+                    _key1Timer.Start();
+                }
             }
 
-            if (DataModel.Key2CheckBox == true && DataModel.Key2Interval != 0)
+            if (DataModel.Key2CheckBox == true)
             {
-                _key2Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key2Interval);
-                _key2Timer.Start();
+                if (DataModel.Key2Hold)
+                {
+                    ExecuteMacroAction(Key.D2, true);
+                    _key2Timer.Interval = TimeSpan.FromMilliseconds(Const.HOLD_REPEAT_INTERVAL);
+                    _key2Timer.Start();
+                }
+                else if (DataModel.Key2Interval > 0)
+                {
+                    _key2Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key2Interval);
+                    _key2Timer.Start();
+                }
             }
 
-            if (DataModel.Key3CheckBox == true && DataModel.Key3Interval != 0)
+            if (DataModel.Key3CheckBox == true)
             {
-                _key3Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key3Interval);
-                _key3Timer.Start();
+                if (DataModel.Key3Hold)
+                {
+                    ExecuteMacroAction(Key.D3, true);
+                    _key3Timer.Interval = TimeSpan.FromMilliseconds(Const.HOLD_REPEAT_INTERVAL);
+                    _key3Timer.Start();
+                }
+                else if (DataModel.Key3Interval > 0)
+                {
+                    _key3Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key3Interval);
+                    _key3Timer.Start();
+                }
             }
 
-            if (DataModel.Key4CheckBox == true && DataModel.Key4Interval != 0)
+            if (DataModel.Key4CheckBox == true)
             {
-                _key4Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key4Interval);
-                _key4Timer.Start();
+                if (DataModel.Key4Hold)
+                {
+                    ExecuteMacroAction(Key.D4, true);
+                    _key4Timer.Interval = TimeSpan.FromMilliseconds(Const.HOLD_REPEAT_INTERVAL);
+                    _key4Timer.Start();
+                }
+                else if (DataModel.Key4Interval > 0)
+                {
+                    _key4Timer.Interval = TimeSpan.FromMilliseconds(DataModel.Key4Interval);
+                    _key4Timer.Start();
+                }
             }
 
-            if (DataModel.MouseLeftCheckBox == true && DataModel.MouseLeftInterval != 0)
+            if (DataModel.MouseLeftCheckBox == true)
             {
-                _mouseLeftTimer.Interval = TimeSpan.FromMilliseconds(DataModel.MouseLeftInterval);
-                _mouseLeftTimer.Start();
+                if (DataModel.MouseLeftHold)
+                {
+                    ExecuteMouseAction(true, true);
+                    _mouseLeftTimer.Interval = TimeSpan.FromMilliseconds(Const.HOLD_REPEAT_INTERVAL);
+                    _mouseLeftTimer.Start();
+                }
+                else if (DataModel.MouseLeftInterval > 0)
+                {
+                    _mouseLeftTimer.Interval = TimeSpan.FromMilliseconds(DataModel.MouseLeftInterval);
+                    _mouseLeftTimer.Start();
+                }
             }
 
-            if (DataModel.MouseRightCheckBox == true && DataModel.MouseRightInterval != 0)
+            if (DataModel.MouseRightCheckBox == true)
             {
-                _mouseRightTimer.Interval = TimeSpan.FromMilliseconds(DataModel.MouseRightInterval);
-                _mouseRightTimer.Start();
+                if (DataModel.MouseRightHold)
+                {
+                    ExecuteMouseAction(false, true);
+                    _mouseRightTimer.Interval = TimeSpan.FromMilliseconds(Const.HOLD_REPEAT_INTERVAL);
+                    _mouseRightTimer.Start();
+                }
+                else if (DataModel.MouseRightInterval > 0)
+                {
+                    _mouseRightTimer.Interval = TimeSpan.FromMilliseconds(DataModel.MouseRightInterval);
+                    _mouseRightTimer.Start();
+                }
             }
         }
         else
@@ -229,6 +288,15 @@ public class MainViewModel : BaseViewModel
         _key4Timer.Stop();
         _mouseLeftTimer.Stop();
         _mouseRightTimer.Stop();
+
+        // 매크로 중단 시 '지속' 모드로 동작 중이었던 항목들만 확실하게 떼어줍니다. 
+        // (누르지 않은 키에 대해 떼는 신호를 보내면 브라우저 등이 오작동할 수 있음)
+        if (DataModel.Key1CheckBox && DataModel.Key1Hold) KeyboardSender.ReleaseKey(Key.D1);
+        if (DataModel.Key2CheckBox && DataModel.Key2Hold) KeyboardSender.ReleaseKey(Key.D2);
+        if (DataModel.Key3CheckBox && DataModel.Key3Hold) KeyboardSender.ReleaseKey(Key.D3);
+        if (DataModel.Key4CheckBox && DataModel.Key4Hold) KeyboardSender.ReleaseKey(Key.D4);
+        if (DataModel.MouseLeftCheckBox && DataModel.MouseLeftHold) KeyboardSender.ReleaseLeftMouse();
+        if (DataModel.MouseRightCheckBox && DataModel.MouseRightHold) KeyboardSender.ReleaseRightMouse();
     }
     
     private void PlaySound(string resourceUri)

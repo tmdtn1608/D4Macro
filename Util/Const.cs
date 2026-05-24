@@ -10,6 +10,8 @@ public static class Const
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "D4Macro","quickSave.json");
     public const string PROCESS_NAME = "Diablo IV";
     // public const string PROCESS_NAME = "notepad";
+    // public const string PROCESS_NAME = "chrome";
+    public const int HOLD_REPEAT_INTERVAL = 30;
     
     public enum LaunchKeyEnum
     {

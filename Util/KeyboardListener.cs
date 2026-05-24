@@ -14,6 +14,7 @@ public class KeyboardListener : IDisposable
     private IntPtr _hookID = IntPtr.Zero;
 
     public event EventHandler<KeyEventArgs> KeyPressed;
+    public event EventHandler<KeyEventArgs> KeyReleased;
 
     public KeyboardListener()
     {
@@ -38,15 +39,21 @@ public class KeyboardListener : IDisposable
     private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
 
     private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam) {
-        if (nCode >= 0 && (wParam == (IntPtr)WM_KEYDOWN))
+        if (nCode >= 0 && (wParam == (IntPtr)WM_KEYDOWN || wParam == (IntPtr)WM_KEYUP))
         {
             int vkCode = Marshal.ReadInt32(lParam);
             var key = KeyInterop.KeyFromVirtualKey(vkCode);
-            var eventArgs = new KeyEventArgs(Keyboard.PrimaryDevice, PresentationSource.FromVisual(Application.Current.MainWindow), 0, key)
+            
+            if (wParam == (IntPtr)WM_KEYDOWN)
             {
-                RoutedEvent = wParam == (IntPtr)WM_KEYDOWN ? Keyboard.KeyDownEvent : Keyboard.KeyUpEvent
-            };
-            KeyPressed?.Invoke(this, eventArgs);
+                var eventArgs = new KeyEventArgs(Keyboard.PrimaryDevice, PresentationSource.FromVisual(Application.Current.MainWindow), 0, key) { RoutedEvent = Keyboard.KeyDownEvent };
+                KeyPressed?.Invoke(this, eventArgs);
+            }
+            else if (wParam == (IntPtr)WM_KEYUP)
+            {
+                var eventArgs = new KeyEventArgs(Keyboard.PrimaryDevice, PresentationSource.FromVisual(Application.Current.MainWindow), 0, key) { RoutedEvent = Keyboard.KeyUpEvent };
+                KeyReleased?.Invoke(this, eventArgs);
+            }
         }
         return CallNextHookEx(_hookID, nCode, wParam, lParam);
     }
